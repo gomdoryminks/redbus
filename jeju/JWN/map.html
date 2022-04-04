@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>휠체어 네비 대중교통</title>
+        <link rel="stylesheet" href="../../css/font.css">
+        <link rel="stylesheet" href="../../css/jquery-ui.css">
+        <link rel="stylesheet" href="../../css/jquery-ui.theme.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+        <link rel="stylesheet" href="../../css/default.css">
+        <link rel="stylesheet" href="../../css/layout.css">
+        <link rel="stylesheet" href="../../css/style.css">
+        
+        <script src="../../js/jquery-3.4.1.js"></script>
+        <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=7c27b395b09309e57fc0371fe6668b50&libraries=services" type="text/javascript"></script>
+        <script src="../../js/bis-map.js"></script>
+        <script src="../../js/bis-script.js"></script>
+    </head>
+
+    <body>
+        <div class="preloader">
+            <div class="spinner">
+                <span class="spinner-rotate"></span>
+            </div>
+        </div>
+        
+        <div class="wrap">
+            <aside>
+                <h1><a href="map.html"><img src="../../images/logo-JWN.png" alt=""></a></h1>
+                <nav>
+                    <ul class="dep01">
+                        <li>
+                            <a href="map.html">대중교통 정보알림</a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+            <section>
+                <div class="top">
+                    <div class="container"><span>안녕하세요 <b>홍길동님</b></span></div>
+                </div>
+                <div class="container cont contMapArea">
+                    <div id="contMap" class="contMap"></div>
+                    <div id="contList" class="on">
+                        <div class="listBtnArea cf">
+                            <ul class="listBtnTab cf">
+                                <li class="listBtn on" data-type="route" onclick="setListBtnTab(this);"><span>노선정보</span></li>
+                                <li class="listBtn" data-type="station" onclick="setListBtnTab(this);"><span>정류장정보</span></li>
+                            </ul>
+                            <div id="arrowBtn" class="listBtn"><span><i class="fas fa-chevron-down"></i></span></div>
+                        </div>
+                        <div class="listInfoArea">
+                            
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    Copyright 2021 휠체어 네비 대중교통. All rights reserved.
+                </footer>
+            </section>
+        </div>
+        
+        <div id="alertLayer" class="layerWrap">
+            <div class="layerMask"></div>
+            <div class="layerBox">
+                <div class="layerContent">
+                    
+                </div>
+                <div class="layerBtnArea cf">
+                    <button type="button" class="layerBtn confirmBtn">확인</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="confirmLayer" class="layerWrap">
+            <div class="layerMask"></div>
+            <div class="layerBox">
+                <div class="layerContent">
+                    
+                </div>
+                <div class="layerBtnArea cf">
+                    <button type="button" class="layerBtn halfBtn confirmBtn">확인</button>
+                    <button type="button" class="layerBtn halfBtn closeBtn" onclick="closeLayer(this);">취소</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
