@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+body {
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+}
+
+.mNav {
+    bottom: calc(constant(safe-area-inset-bottom) + 0px);
+    bottom: calc(env(safe-area-inset-bottom) + 0px);
+}
+
+.mFooter {
+    bottom: calc(constant(safe-area-inset-bottom) + 0px);
+    bottom: calc(env(safe-area-inset-bottom) + 0px);
+}
+
+.mContainer {
+    min-height: calc(constant(safe-area-inset-bottom) + 100vh);
+    min-height: calc(env(safe-area-inset-bottom) + 100vh);
+}
+
+.mContainer .mMainList {
+    min-height: calc(constant(safe-area-inset-bottom) + 100vh - 100px);
+    min-height: calc(env(safe-area-inset-bottom) + 100vh - 100px);
+}
+
+.mContainer #mContMap {
+    min-height: calc(constant(safe-area-inset-bottom) + 100vh - 100px);
+    min-height: calc(env(safe-area-inset-bottom) + 100vh - 100px);
+}
+
+.mContainer #mContList {
+    bottom: calc(constant(safe-area-inset-bottom) + 50px);
+    bottom: calc(env(safe-area-inset-bottom) + 50px);
+}
+
+.mContainer #mContList.on {
+    /*height: calc(constant(safe-area-inset-bottom) + 50vh);
+    height: calc(env(safe-area-inset-bottom) + 50vh);*/
+    height: calc(constant(safe-area-inset-bottom) + 50vh - 40px);
+    height: calc(env(safe-area-inset-bottom) + 50vh - 40px);
+}
+
+.layerWrap .layerBox {
+    max-height: calc(constant(safe-area-inset-bottom) + 100vh - 20px);
+    max-height: calc(env(safe-area-inset-bottom) + 100vh - 20px);
+}
+
+.layerAllWrap .layerBox .layerContent {
+    max-height: calc(constant(safe-area-inset-bottom) + 100vh);
+    max-height: calc(env(safe-area-inset-bottom) + 100vh);
+}
+

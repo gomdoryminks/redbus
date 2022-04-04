@@ -1,0 +1,12 @@
+@charset 'utf-8';
+
+@font-face {
+  font-family: 'Malgun Gothic';
+  src: local(MalgunGothic),
+       url(../fonts/MalgunGothic.eot?#iefix) format('embedded-opentype'),
+       url(../fonts/MalgunGothic.woff2) format('woff2'),
+       url(../fonts/MalgunGothic.woff) format('woff'),
+       url(../fonts/MalgunGothic.ttf) format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}

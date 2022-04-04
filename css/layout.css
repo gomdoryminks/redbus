@@ -1,0 +1,99 @@
+@charset "utf-8";
+#SkipMenu {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 500;
+    width: 100%;
+    height: 0px;
+    background-color: #ffba00;
+    box-shadow: inset 0px -2px 5px rgba(0,0,0,0.1);
+}
+html, body {
+    height:100%;
+}
+.wrap {
+    width:100%;
+    display:flex;
+    height:100%;
+}
+.wrap aside {
+    width:280px;
+    box-shadow: 0 0 40px 0px rgba(0,0,0,0.2);
+    background:#eef1f4;
+    height:100%;
+}
+.wrap aside h1 {
+    width:100%;
+    padding:20px;
+    text-align: center;
+    background:#d5dde8;
+}
+.wrap aside h1 a{
+
+}
+.wrap aside h1 a img{
+    max-width:190px;
+}
+.wrap aside nav {
+}
+.wrap aside nav ul.dep01 {
+    display:flex;
+    flex-direction: column;
+}
+.wrap aside nav ul.dep01 > li {
+}
+.wrap aside nav ul.dep01 > li > a{
+    display:block;
+    border-bottom:solid 1px #264b7a;
+    padding:15px 20px;
+    background:url(../images/icon-select-arrow.png) no-repeat calc(100% - 25px) center #0a2a52;
+    color:#fff;
+    font-size:14px;
+    font-weight:500;
+}
+.wrap aside nav ul.dep01 > li > a.sgMenu {
+    background:#0a2a52;
+}
+.wrap aside nav ul.dep01 > li > a.on.sgMenu {
+    background:#ffc600;
+    color:#0a2a52;
+}
+.wrap aside nav ul.dep01 > li > a.on{
+    color:#ffc600;
+    font-weight:bold;
+    background:url(../images/icon-select-arrow-down.png) no-repeat calc(100% - 25px) center #0a2a52;}
+.wrap aside nav ul.dep01 > li .dep02 {
+    display:none;
+    background:#e9dcb0;
+}
+.wrap aside nav ul.dep01 > li > a.on +.dep02 {
+    display:block;
+}
+.wrap aside nav ul.dep01 > li .dep02 li {
+}
+.wrap aside nav ul.dep01 > li .dep02 li a{
+    display:block;
+    padding:10px 25px;
+    border-bottom:solid 1px #f3f0d2;
+    font-size:13px;
+    color:#0a2a52;
+    line-height:1;
+}
+.wrap aside nav ul.dep01 > li .dep02 li a.on {
+    background:#f2c752;
+    color:#0a2a52;
+    font-weight:bold;
+    border-bottom:solid 1px #f2c752;
+}
+
+footer {
+    border-top:solid 1px #ddd;
+    position:fixed;
+    bottom:0px;
+    width:100%;
+    padding:10px;
+    font-size:12px;
+    background:#fff;
+}
