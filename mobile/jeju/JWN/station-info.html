@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>휠체어 네비 대중교통</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+        <link rel="stylesheet" href="../../../css/font.css">
+        <link rel="stylesheet" href="../../../css/jquery-ui.css">
+        <link rel="stylesheet" href="../../../css/jquery-ui.theme.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+        <link rel="stylesheet" href="../../../css/default.css">
+        <link rel="stylesheet" href="../../../css/layout.css">
+        <link rel="stylesheet" href="../../../css/style.css">
+        
+        <script src="../../../js/jquery-3.4.1.js"></script>
+        <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=7c27b395b09309e57fc0371fe6668b50&libraries=services" type="text/javascript"></script>
+        <script src="../../../js/bis-map.js"></script>
+        <script src="../../../js/bis-script.js"></script>
+    </head>
+
+    <body>
+        <div class="preloader">
+            <div class="spinner">
+                <span class="spinner-rotate"></span>
+            </div>
+        </div>
+        
+        <div class="mWrap">
+            <header class="mHeader">
+                <a href="javascript:void(0);" class="mHeaderLeft" onclick="window.history.replaceState({},'',window.location.pathname); location.reload();">
+                    <div class="img"></div>
+                    <div class="tit">새로고침</div>
+                </a>
+                <a href="index.html" class="mHeaderLogo"><img src="../../../images/logo-JWN.png" alt="logo"></a>
+                <a href="javascript:void(0);" class="mHeaderRight" onclick="openLayer('alert','개발 예정입니다.','');">
+                    <div class="img"></div>
+                    <div class="tit">QR검색</div>
+                </a>
+            </header>
+            
+            <nav class="mNav">
+                <ul class="mNavList cf">
+                    <li class="mNavRouteSearch">
+                        <a href="route-info.html">
+                            <div class="img"></div>
+                            <div class="tit">노선검색</div>
+                        </a>
+                    </li>
+                    <li class="mNavStationSearch on">
+                        <a href="station-info.html">
+                            <div class="img"></div>
+                            <div class="tit">정류장검색</div>
+                        </a>
+                    </li>
+                    <li class="mNavCourseSearch">
+                        <a href="course-info.html">
+                            <div class="img"></div>
+                            <div class="tit">경로검색</div>
+                        </a>
+                    </li>
+                    <li class="mNavRouteDetail">
+                        <a href="route-detail.html">
+                            <div class="img"></div>
+                            <div class="tit">노선정보</div>
+                        </a>
+                    </li>
+                    <li class="mNavArrivalNotice">
+                        <a href="arrival-notice.html">
+                            <div class="img"></div>
+                            <div class="tit">도착알림</div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="mContainer">
+                <div id="mContMap" class="contMap">
+                    <div class="mGpsBtn"><img src="../../../images/gps.png"></div>
+                </div>
+                <div id="mContList" class="mContListStation on">
+                    <div class="mListBtnArea">
+                        <div class="mListBtn"><span><i class="fas fa-chevron-down"></i></span></div>
+                    </div>
+                    <div class="mListInfoArea">
+                        <div class="mInfoTop cf">
+                            <div class="mInfoSearch">
+                                <form id="" name="" method="" class="cf">
+                                    <input type="hidden" name="type" value="mStation">
+                                    <input type="text" name="keyword" placeholder="정류장명 또는 정류장번호를 입력해주세요.">
+                                    <input type="button" value="검색" onclick="setInfoSearch(this);">            
+                                </form>        
+                            </div>
+                            <div class="mInfoCheck cf">
+                                <div class="mInfoTitle">정류장정보 (<span class="num">0</span>)</div>
+                                <div class="mInfoPosition"><input type="checkbox" name="" id="myPosition"><label for="myPosition">현위치기준 검색</label></div>
+                            </div>
+                        </div>
+                        <div class="mInfoMain">
+                            <div class="empty">정류장을 검색해주세요.</div>          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="alertLayer" class="layerWrap">
+            <div class="layerMask"></div>
+            <div class="layerBox">
+                <div class="layerContent">
+                    
+                </div>
+                <div class="layerBtnArea cf">
+                    <button type="button" class="layerBtn confirmBtn">확인</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="confirmLayer" class="layerWrap">
+            <div class="layerMask"></div>
+            <div class="layerBox">
+                <div class="layerContent">
+                    
+                </div>
+                <div class="layerBtnArea cf">
+                    <button type="button" class="layerBtn halfBtn confirmBtn">확인</button>
+                    <button type="button" class="layerBtn halfBtn closeBtn" onclick="closeLayer(this);">취소</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
