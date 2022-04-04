@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>광역(시외)버스 스마트 안전서비스</title>
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/jquery-ui.theme.css">
+    <link rel="stylesheet" href="../css/default.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script src="../js/jquery-3.4.1.js"></script>
+    <script src="../js/script.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <aside>
+            <h1><a href="map.html"><img src="../images/logo-suwon.png" alt=""></a></h1>
+            <nav>
+                <ul class="dep01">
+                    <li>
+                        <a href="#" class="on">이동국 기지관리</a>
+                        <ul class="dep02">
+                            <li><a href="equipment.html" class="on">기기관리</a></li>
+                            <li><a href="run-list.html">운행리스트</a></li>
+                            <li><a href="run-download.html">운행정보 다운로드</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">운행정보 통합관제</a>
+                    </li>
+                    <li>
+                        <a href="#">사고현황</a>
+                        <ul class="dep02">
+                            <li><a href="#">사고현황</a></li>
+                            <li><a href="#">운영통계</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">IoT 기기현황</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <section>
+            <div class="top">
+                <div class="container"><span>안녕하세요 <b>홍길동님</b></span></div>
+            </div>
+            <div class="container cont">
+                <div class="tit">
+                    <h2>검색</h2>
+                    <a href="#" class="btn_talk">Talk</a>
+                </div>
+                <div class="search_opt">
+                    <label for="">전원상태</label>
+                    <select name="" id="">
+                        <option value="">on</option>
+                        <option value="">off</option>
+                    </select>
+                    <select name="" id="">
+                        <option value="">버스번호</option>
+                        <option value="">고유키</option>
+                        <option value="">종류</option>
+                        <option value="">포트</option>
+                    </select>
+                    <input type="text">
+                    <div class="btns">
+                        <button class="btn btn_default">초기화</button>
+                        <button class="btn btn_blue"><img src="../images/icon_search.png" alt=""> 검색</button>
+                    </div>
+                </div>
+                <div class="tbl_wrap">
+                    <div class="tbl_top">
+                        <div class="left"><span>전체 2건</span></div>
+                        <div class="right"><button class="btn btn_reboot small">시스템 재시작</button></div>
+                    </div>
+                    <table class="list">
+                        <tr>
+                            <th><input type="checkbox"></th>
+                            <th>버스번호</th>
+                            <th>고유키</th>
+                            <th>종류</th>
+                            <th>on/off</th>
+                            <th>원격여부</th>
+                            <th>원격포트</th>
+                            <th>등록일</th>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>1</td>
+                            <td>00-01-02-05</td>
+                            <td>Rover</td>
+                            <td>on</td>
+                            <td>yes</td>
+                            <td>8080</td>
+                            <td>2021-10-16</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>2</td>
+                            <td>00-01-02-05</td>
+                            <td>Rover</td>
+                            <td>on</td>
+                            <td>yes</td>
+                            <td>8080</td>
+                            <td>2021-10-16</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>3</td>
+                            <td>00-01-02-05</td>
+                            <td>Rover</td>
+                            <td>on</td>
+                            <td>yes</td>
+                            <td>8080</td>
+                            <td>2021-10-16</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="paging">
+                    <ul>
+                        <li><a href="#" class="first">처음으로</a></li>
+                        <li><a href="#" class="prev">이전으로</a></li>
+                        <li><a href="#" class="on">1</a></li>
+                        <li><a href="#" class="">2</a></li>
+                        <li><a href="#" class="">3</a></li>
+                        <li><a href="#" class="next">다음으로</a></li>
+                        <li><a href="#" class="last">마지막으로</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <footer>
+                Copyright 2021 수원 광역버스 스마트 안전서비스. All rights reserved.
+            </footer>
+        </section>
+
+
+    </div>
+</body></html>
