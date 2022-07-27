@@ -113,11 +113,6 @@ $(document).ready(function(){
     $("#infoVisible").change(function() {
     	setRouteStationVisible();
     });
-    
-    //정류장검색에서 현위치기준 검색 체크여부
-    $("#myPosition").click(function() {
-        $(".mGpsBtn").trigger("click");
-    });
 });
 
 //정류장 도착정보에 필요한 노선정보 조회
@@ -669,14 +664,13 @@ function setBISL(obj) {
 }
 
 //모바일 노선검색에서 노선 클릭시 실행
-function setMRISL(obj,busId) {
+function setMRISL(obj) {
     var dataRouteId = $(obj).attr("data-route-id");
     var listHtml = "";
     var resultJson = {};
     var resultArr = [];
-    busId = (busId != undefined) ? busId : "";
     
-    if ($(obj).parent("li").hasClass("on") && busId == "") {
+    if ($(obj).parent("li").hasClass("on")) {
         $(obj).parent("li").removeClass("on");
         $(obj).next(".stationList").html(listHtml);
         
@@ -756,10 +750,10 @@ function setMRISL(obj,busId) {
 
                     removeMarker();
                     removePolyline();
-                    routeMarker("Y","Y",dataRouteId,resultArr,busId);
+                    routeMarker("Y","Y",dataRouteId,resultArr);
                     
                     if (globalFileUrl.indexOf("/JWN/") > -1) {
-        	        	setRouteBusVisible(dataRouteId,busId);
+        	        	setRouteBusVisible(dataRouteId);
         	        }
 
                     $(".preloader").fadeOut(400);
@@ -1683,42 +1677,12 @@ function setInfoSearch(obj) {
                         });
                     }
                 } else {
-                    if (globalFileUrl.indexOf("/JWN/") > -1) {
-                        var listCnt = 0;
-                		
-                		$("#mContList .mListInfoArea .mInfoMain .routeList>li").each(function() {
-                			$(this).find(".stationList").html("");
-                			
-                			$(this).css("display","block");
-                            listCnt++;
-                		});
-                		
-                		$("#mContList .mListInfoArea .mInfoTop .mInfoTitle .num").text(listCnt);
-                		
-                		if (listCnt > 0) {
-                			$("#mContList .mListInfoArea .mInfoMain .empty").css("display","none");
-                			$("#mContList .mListInfoArea .mInfoMain .routeList>li").removeClass("on");
-                			$("#mContList .mListInfoArea .mInfoMain .routeList").css("display","block");
-                		} else {
-                			$("#mContList .mListInfoArea .mInfoMain .routeList>li").removeClass("on");
-                			$("#mContList .mListInfoArea .mInfoMain .routeList").css("display","none");
-                			
-                			if ($("#mContList .mListInfoArea .mInfoMain .empty").length == 0) {
-                				$("#mContList .mListInfoArea .mInfoMain").append("<div class='empty'>노선정보가 없습니다.</div>");
-                			}
-                			
-                			$("#mContList .mListInfoArea .mInfoMain .empty").css("display","block");
-                		}
-                    } else {
-                        openLayer("alert","노선번호를 입력해주세요.","");
-                    }
+                    openLayer("alert","노선번호를 입력해주세요.","");
                 }
             } else if (type == "mStation") {
                 if (keyword != "" && keyword != undefined && keyword != null) {
                 	$(".preloader").addClass("opacity");
                 	$(".preloader").css("display","block");
-                    
-                    clearTimeout(gpsTimer);
                 	
                 	//검색한 정류장정보 가져오기
                 	$.ajax({
@@ -1731,9 +1695,6 @@ function setInfoSearch(obj) {
 
                             var listCnt = (resultXml.length > 0) ? resultXml.length : 0;
                 	        
-                            gpsSearchArr = [];
-                            gpsSearchKeyword = keyword;
-                            
                 	        if (listCnt > 0) {
                                 listCnt = 0;
                                 
@@ -1746,8 +1707,6 @@ function setInfoSearch(obj) {
                                         resultJson[listCnt] = resultXmlJson;
 
                                         listCnt++;
-                                        
-                                        gpsSearchArr.push(stationId);
                                     }
                                 });
                                 
@@ -1786,12 +1745,8 @@ function setInfoSearch(obj) {
                             removeLowBusMarker();
             	            removePolyline();
             	            stationMarker("Y","N","N",resultArr);
-                            
-                            if (globalFileUrl.indexOf("/JWN/") > -1 && $(".mGpsBtn").hasClass("on")) {
-                                setGpsPosition2("station","start");
-                            } else {
-                                $(".preloader").fadeOut(400);
-                            }
+            	            
+            	            $(".preloader").fadeOut(400);
                 		},
                 		fail: function(res) {
                 			if (res.readyState != 0 || res.status != 0) {
@@ -1815,39 +1770,7 @@ function setInfoSearch(obj) {
                 		}
                 	});
                 } else {
-                    if (globalFileUrl.indexOf("/JWN/") > -1) {
-                        $(".preloader").addClass("opacity");
-                        $(".preloader").css("display","block");
-                        
-                        clearTimeout(gpsTimer);
-                        
-                        var listCnt = 0;
-                        
-                        gpsSearchArr = [];
-                        gpsSearchKeyword = "";
-
-                        listHtml += "<div class='empty'>정류장을 검색해주세요.</div>";
-
-                        if ($("#mContList .mListInfoArea .mInfoTop .mInfoTitle .num").length > 0) {
-                            $("#mContList .mListInfoArea .mInfoTop .mInfoTitle .num").text(listCnt);
-                        }
-
-                        if ($("#mContList .mListInfoArea .mInfoMain").length > 0) {
-                            $("#mContList .mListInfoArea .mInfoMain").html(listHtml);
-                        }
-
-                        removeMarker();
-                        removeLowBusMarker();
-                        removePolyline();
-
-                        if ($(".mGpsBtn").hasClass("on")) {
-                            setGpsPosition2("station","start");
-                        } else {
-                            $(".preloader").fadeOut(400);
-                        }
-                    } else {
-                        openLayer("alert","정류장명 또는 정류장번호를 입력해주세요.","");
-                    }
+                    openLayer("alert","정류장명 또는 정류장번호를 입력해주세요.","");
                 }
             } else if (type == "mStart") {
                 if (keyword != "" && keyword != undefined && keyword != null) {
