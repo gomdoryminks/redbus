@@ -1406,11 +1406,12 @@ section #contList .listInfoArea .infoMain .infoMainRight .routeTable .table tr t
 }
 
 .mContainer #mContMap .mGpsBtn {
-    width: auto;
-    height: auto;
+    width: 32px;
+    height: 32px;
     display: inline-block;
     padding: 6px 6px 5px;
-    background-color: #ffffff;
+    background: #ffffff url(../images/gps.png) no-repeat center;
+    background-size: 20px auto;
     position: absolute;
     top: 5px;
     left: 5px;
@@ -1425,10 +1426,22 @@ section #contList .listInfoArea .infoMain .infoMainRight .routeTable .table tr t
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 2px 0px;
 }
 
-.mContainer #mContMap .mGpsBtn img {
+.mContainer #mContMap .mGpsBtn.on {
+    background: #274475 url(../images/gps-on.png) no-repeat center;
+    background-size: 20px auto;
+}
+
+/*.mContainer #mContMap .mGpsBtn img {
     width: 20px;
     height: 20px;
     vertical-align: top;
+}*/
+
+.mContainer #mContMap .mContMapArea.on {
+    -webkit-transition: all 2s linear;
+    -moz-transition: all 2s linear;
+    -ms-transition: all 2s linear;
+	transition: all 2s linear;
 }
 
 .mContainer #mContList {
@@ -2288,14 +2301,22 @@ section #contList .listInfoArea .infoMain .infoMainRight .routeTable .table tr t
 
 .busMarkerArea {
     z-index: 3 !important;
-    -webkit-transition: all 1s;
-    -moz-transition: all 1s;
-    -ms-transition: all 1s;
-	transition: all 1s;
+    -webkit-transition: all 2s linear;
+    -moz-transition: all 2s linear;
+    -ms-transition: all 2s linear;
+	transition: all 2s linear;
 }
 
 .busMarkerArea.on {
     z-index: 4 !important;
+}
+
+.gpsposMarkerArea {
+    z-index: 4 !important;
+    /*-webkit-transition: all 6s linear;
+    -moz-transition: all 6s linear;
+    -ms-transition: all 6s linear;
+	transition: all 6s linear;*/
 }
 
 .markerArea.not-visible {
@@ -2305,7 +2326,6 @@ section #contList .listInfoArea .infoMain .infoMainRight .routeTable .table tr t
 .markerArea .bmTit {
 	width: 80px;
 	height: auto;
-	margin-left: 18px;
 	padding: 2px;
 	background-color: #ffffff;
 	border: 1px solid #274475;
@@ -2323,14 +2343,40 @@ section #contList .listInfoArea .infoMain .infoMainRight .routeTable .table tr t
     transform: translateX(-50%);
 }
 
+.markerArea .bmCircle {
+    width: 60px;
+    height: 60px;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    background-color: #274475;
+    border-radius: 50%;
+    opacity: 0.3;
+    transform: translate(-50%,-50%);
+}
+
+.markerArea .bmCircle.on {
+    display: block;
+    -webkit-animation: signal 2s ease-out infinite;
+    -moz-animation: signal 2s ease-out infinite;
+    -o-animation: signal 2s ease-out infinite;
+    animation: signal 2s ease-out infinite;
+}
+
+.lowBusMarkerArea>img {
+    position: static !important;
+}
+
 .infoWindowArea {
     background: transparent !important;
     border: none !important;
     z-index: 5 !important;
-    -webkit-transition: all 1s;
-    -moz-transition: all 1s;
-    -ms-transition: all 1s;
-	transition: all 1s;
+    -webkit-transition: all 2s linear;
+    -moz-transition: all 2s linear;
+    -ms-transition: all 2s linear;
+	transition: all 2s linear;
 }
 
 .stationInfoWindow {
@@ -2689,5 +2735,29 @@ section #contList .listInfoArea .infoMain .infoMainRight .routeTable .table tr t
 
 @keyframes spinner {
     to {transform: rotate(360deg);}
+}
+
+@-webkit-keyframes signal {
+    0% {transform: translate(-50%,-50%) scale(0.5); opacity: 0.4;}
+    75% {transform: translate(-50%,-50%) scale(1.75); opacity: 0.4;}
+    100% {transform: translate(-50%,-50%) scale(2); opacity: 0;}
+}
+
+@-moz-keyframes signal {
+    0% {transform: translate(-50%,-50%) scale(0.5); opacity: 0.4;}
+    75% {transform: translate(-50%,-50%) scale(1.75); opacity: 0.4;}
+    100% {transform: translate(-50%,-50%) scale(2); opacity: 0;}
+}
+
+@-o-keyframes signal {
+    0% {transform: translate(-50%,-50%) scale(0.5); opacity: 0.4;}
+    75% {transform: translate(-50%,-50%) scale(1.75); opacity: 0.4;}
+    100% {transform: translate(-50%,-50%) scale(2); opacity: 0;}
+}
+
+@keyframes signal {
+    0% {transform: translate(-50%,-50%) scale(0.5); opacity: 0.4;}
+    75% {transform: translate(-50%,-50%) scale(1.75); opacity: 0.4;}
+    100% {transform: translate(-50%,-50%) scale(2); opacity: 0;}
 }
 
