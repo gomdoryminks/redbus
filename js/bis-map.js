@@ -22,6 +22,9 @@ var globalNumOfRows = "5000";
 var globalPageNo = "1";
 var globalApiKey = "a87fc398233d4040b62cc31388674c02";
 
+//국토교통부(TAGO) 버스정류장정보 연동 API
+var globalServiceKey2 = "56Bs5IbSdKXPSlHfHi%2BHzqn3rHxtmXj6zD4QD9mjGmpnNt4FARAhizL2%2Bka8t0w4sjeep%2FTE3OjCD9YfXS8JSg%3D%3D";
+
 //배열 선언
 var globalRouteStationNm = []; //기점↔종점
 var globalRouteStationNm2 = []; //정류장명
@@ -75,1297 +78,6 @@ globalServiceRunType['0'] = "기본";
 globalServiceRunType['1'] = "막차";
 globalServiceRunType['2'] = "첫차";
 
-//저상버스 json 데이터
-var lowBusJson = [
- {
-  "idx": 110,
-  "routeNm": "316-2",
-  "vehicleno": "제주79아3106",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 112,
-  "routeNm": "316-2",
-  "vehicleno": "제주79아3108",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 115,
-  "routeNm": "315-2",
-  "vehicleno": "제주79아3111",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 125,
-  "routeNm": "315-2",
-  "vehicleno": "제주79아3121",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 130,
-  "routeNm": "316-1",
-  "vehicleno": "제주79아3126",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 132,
-  "routeNm": "315-1",
-  "vehicleno": "제주79아3128",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 135,
-  "routeNm": "316-1",
-  "vehicleno": "제주79아3131",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 140,
-  "routeNm": "316-1",
-  "vehicleno": "제주79아3136",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 141,
-  "routeNm": "315-1",
-  "vehicleno": "제주79아3137",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 142,
-  "routeNm": "316-1",
-  "vehicleno": "제주79아3138",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 143,
-  "routeNm": "315-1",
-  "vehicleno": "제주79아3139",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 148,
-  "routeNm": "315-1",
-  "vehicleno": "제주79아3144",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 154,
-  "routeNm": "315-1",
-  "vehicleno": "제주79아3150",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 165,
-  "routeNm": "316-2",
-  "vehicleno": "제주79아3161",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주여객"
- },
- {
-  "idx": 320,
-  "routeNm": "325-12",
-  "vehicleno": "제주79아3503",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 321,
-  "routeNm": "325-12",
-  "vehicleno": "제주79아3504",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 325,
-  "routeNm": "431-1",
-  "vehicleno": "제주79아3508",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 327,
-  "routeNm": "325-11",
-  "vehicleno": "제주79아3510",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 333,
-  "routeNm": "325-11",
-  "vehicleno": "제주79아3516",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 339,
-  "routeNm": "326-2",
-  "vehicleno": "제주79아3522",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 341,
-  "routeNm": "326-1",
-  "vehicleno": "제주79아3524",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 342,
-  "routeNm": "325-11",
-  "vehicleno": "제주79아3525",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 343,
-  "routeNm": "432-1",
-  "vehicleno": "제주79아3526",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 344,
-  "routeNm": "325-12",
-  "vehicleno": "제주79아3527",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 349,
-  "routeNm": "325-11",
-  "vehicleno": "제주79아3532",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 353,
-  "routeNm": "325-11",
-  "vehicleno": "제주79아3536",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 363,
-  "routeNm": "344-1",
-  "vehicleno": "제주79아3546",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 364,
-  "routeNm": "344-1",
-  "vehicleno": "제주79아3547",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 365,
-  "routeNm": "343-10",
-  "vehicleno": "제주79아3548",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 400,
-  "routeNm": "432-1",
-  "vehicleno": "제주79아3583",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 401,
-  "routeNm": "432-1",
-  "vehicleno": "제주79아3584",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 402,
-  "routeNm": "431-1",
-  "vehicleno": "제주79아3585",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 403,
-  "routeNm": "431-1",
-  "vehicleno": "제주79아3586",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 404,
-  "routeNm": "431-1",
-  "vehicleno": "제주79아3587",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "극동여객"
- },
- {
-  "idx": 406,
-  "routeNm": "415-2",
-  "vehicleno": "제주79아3601",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 407,
-  "routeNm": "415-2",
-  "vehicleno": "제주79아3602",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 409,
-  "routeNm": "415-1",
-  "vehicleno": "제주79아3604",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 411,
-  "routeNm": "441-7",
-  "vehicleno": "제주79아3606",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 413,
-  "routeNm": "455-7",
-  "vehicleno": "제주79아3608",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 415,
-  "routeNm": "455-5",
-  "vehicleno": "제주79아3610",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 416,
-  "routeNm": "415-2",
-  "vehicleno": "제주79아3611",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 422,
-  "routeNm": "415-2",
-  "vehicleno": "제주79아3617",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 438,
-  "routeNm": "415-1",
-  "vehicleno": "제주79아3633",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 439,
-  "routeNm": "415-1",
-  "vehicleno": "제주79아3634",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 440,
-  "routeNm": "415-1",
-  "vehicleno": "제주79아3635",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 446,
-  "routeNm": "415-2",
-  "vehicleno": "제주79아3641",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 447,
-  "routeNm": "442-1",
-  "vehicleno": "제주79아3642",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 448,
-  "routeNm": "441-7",
-  "vehicleno": "제주79아3643",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 449,
-  "routeNm": "442-1",
-  "vehicleno": "제주79아3644",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 450,
-  "routeNm": "455-7",
-  "vehicleno": "제주79아3645",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 451,
-  "routeNm": "415-2",
-  "vehicleno": "제주79아3646",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 452,
-  "routeNm": "455-6",
-  "vehicleno": "제주79아3647",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 453,
-  "routeNm": "415-1",
-  "vehicleno": "제주79아3648",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 454,
-  "routeNm": "455-5",
-  "vehicleno": "제주79아3649",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 455,
-  "routeNm": "455-6",
-  "vehicleno": "제주79아3650",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 456,
-  "routeNm": "455-8",
-  "vehicleno": "제주79아3651",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼화여객"
- },
- {
-  "idx": 588,
-  "routeNm": "300-1",
-  "vehicleno": "제주79자6026",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주시공영"
- },
- {
-  "idx": 589,
-  "routeNm": "300-5",
-  "vehicleno": "제주79자6027",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주시공영"
- },
- {
-  "idx": 590,
-  "routeNm": "300-2",
-  "vehicleno": "제주79자6028",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "제주시공영"
- },
- {
-  "idx": 639,
-  "routeNm": "690-1",
-  "vehicleno": "제주79자6620",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포공영"
- },
- {
-  "idx": 640,
-  "routeNm": "690-2",
-  "vehicleno": "제주79자6621",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포공영"
- },
- {
-  "idx": 655,
-  "routeNm": "691-3",
-  "vehicleno": "제주79자6636",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포공영"
- },
- {
-  "idx": 656,
-  "routeNm": "880-1",
-  "vehicleno": "제주79자6637",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포공영"
- },
- {
-  "idx": 657,
-  "routeNm": "880-1",
-  "vehicleno": "제주79자6638",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포공영"
- },
- {
-  "idx": 658,
-  "routeNm": "880-1",
-  "vehicleno": "제주79자6639",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포공영"
- },
- {
-  "idx": 676,
-  "routeNm": "341-2",
-  "vehicleno": "제주79자7012",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 677,
-  "routeNm": "341-1",
-  "vehicleno": "제주79자7013",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 679,
-  "routeNm": "342-2",
-  "vehicleno": "제주79자7015",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 703,
-  "routeNm": "349-2",
-  "vehicleno": "제주79자7039",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 704,
-  "routeNm": "341-2",
-  "vehicleno": "제주79자7040",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 705,
-  "routeNm": "348-1",
-  "vehicleno": "제주79자7041",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 714,
-  "routeNm": "380-2",
-  "vehicleno": "제주79자7050",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 715,
-  "routeNm": "380-2",
-  "vehicleno": "제주79자7051",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 717,
-  "routeNm": "370-2",
-  "vehicleno": "제주79자7053",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 718,
-  "routeNm": "370-1",
-  "vehicleno": "제주79자7054",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 719,
-  "routeNm": "341-2",
-  "vehicleno": "제주79자7055",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 722,
-  "routeNm": "348-1",
-  "vehicleno": "제주79자7058",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 723,
-  "routeNm": "342-1",
-  "vehicleno": "제주79자7059",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 724,
-  "routeNm": "342-1",
-  "vehicleno": "제주79자7060",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 763,
-  "routeNm": "370-1",
-  "vehicleno": "제주79자7099",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 764,
-  "routeNm": "370-2",
-  "vehicleno": "제주79자7100",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 765,
-  "routeNm": "380-2",
-  "vehicleno": "제주79자7101",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 766,
-  "routeNm": "380-1",
-  "vehicleno": "제주79자7102",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 767,
-  "routeNm": "342-1",
-  "vehicleno": "제주79자7103",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "삼영교통"
- },
- {
-  "idx": 797,
-  "routeNm": "621-3",
-  "vehicleno": "제주79자7500",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 800,
-  "routeNm": "621-1",
-  "vehicleno": "제주79자7503",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 801,
-  "routeNm": "510-2",
-  "vehicleno": "제주79자7504",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 804,
-  "routeNm": "630-1",
-  "vehicleno": "제주79자7507",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 806,
-  "routeNm": "625-5",
-  "vehicleno": "제주79자7509",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 807,
-  "routeNm": "624-6",
-  "vehicleno": "제주79자7510",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 810,
-  "routeNm": "645-5",
-  "vehicleno": "제주79자7513",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 812,
-  "routeNm": "510-2",
-  "vehicleno": "제주79자7515",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 813,
-  "routeNm": "520-2",
-  "vehicleno": "제주79자7516",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 814,
-  "routeNm": "510-1",
-  "vehicleno": "제주79자7517",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 818,
-  "routeNm": "624-3",
-  "vehicleno": "제주79자7521",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 819,
-  "routeNm": "635-2",
-  "vehicleno": "제주79자7522",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 820,
-  "routeNm": "621-2",
-  "vehicleno": "제주79자7523",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 821,
-  "routeNm": "623-3",
-  "vehicleno": "제주79자7524",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 822,
-  "routeNm": "623-4",
-  "vehicleno": "제주79자7525",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 823,
-  "routeNm": "635-4",
-  "vehicleno": "제주79자7526",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 824,
-  "routeNm": "625-4",
-  "vehicleno": "제주79자7527",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 825,
-  "routeNm": "520-2",
-  "vehicleno": "제주79자7528",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 826,
-  "routeNm": "630-1",
-  "vehicleno": "제주79자7529",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 827,
-  "routeNm": "630-2",
-  "vehicleno": "제주79자7530",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 828,
-  "routeNm": "520-2",
-  "vehicleno": "제주79자7531",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 829,
-  "routeNm": "635-1",
-  "vehicleno": "제주79자7532",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 830,
-  "routeNm": "510-2",
-  "vehicleno": "제주79자7533",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 831,
-  "routeNm": "520-2",
-  "vehicleno": "제주79자7534",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 832,
-  "routeNm": "521-2",
-  "vehicleno": "제주79자7535",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 833,
-  "routeNm": "630-4",
-  "vehicleno": "제주79자7536",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 834,
-  "routeNm": "510-1",
-  "vehicleno": "제주79자7537",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 835,
-  "routeNm": "510-13",
-  "vehicleno": "제주79자7538",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 836,
-  "routeNm": "621-3",
-  "vehicleno": "제주79자7539",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 837,
-  "routeNm": "510-2",
-  "vehicleno": "제주79자7540",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 838,
-  "routeNm": "624-4",
-  "vehicleno": "제주79자7541",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 839,
-  "routeNm": "510-4",
-  "vehicleno": "제주79자7542",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 840,
-  "routeNm": "531-1",
-  "vehicleno": "제주79자7543",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 841,
-  "routeNm": "510-2",
-  "vehicleno": "제주79자7544",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 842,
-  "routeNm": "621-1",
-  "vehicleno": "제주79자7545",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 843,
-  "routeNm": "532-2",
-  "vehicleno": "제주79자7546",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 844,
-  "routeNm": "625-4",
-  "vehicleno": "제주79자7547",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 845,
-  "routeNm": "520-2",
-  "vehicleno": "제주79자7548",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 846,
-  "routeNm": "510-1",
-  "vehicleno": "제주79자7549",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 847,
-  "routeNm": "510-1",
-  "vehicleno": "제주79자7550",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 848,
-  "routeNm": "531-6",
-  "vehicleno": "제주79자7551",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 849,
-  "routeNm": "520-1",
-  "vehicleno": "제주79자7552",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 850,
-  "routeNm": "520-1",
-  "vehicleno": "제주79자7553",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 851,
-  "routeNm": "532-2",
-  "vehicleno": "제주79자7554",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 852,
-  "routeNm": "510-2",
-  "vehicleno": "제주79자7555",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 853,
-  "routeNm": "531-1",
-  "vehicleno": "제주79자7556",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 854,
-  "routeNm": "521-1",
-  "vehicleno": "제주79자7557",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 855,
-  "routeNm": "521-2",
-  "vehicleno": "제주79자7558",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 856,
-  "routeNm": "531-2",
-  "vehicleno": "제주79자7559",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 857,
-  "routeNm": "530-2",
-  "vehicleno": "제주79자7560",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 858,
-  "routeNm": "531-2",
-  "vehicleno": "제주79자7561",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 859,
-  "routeNm": "530-1",
-  "vehicleno": "제주79자7562",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 860,
-  "routeNm": "625-3",
-  "vehicleno": "제주79자7563",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 861,
-  "routeNm": "510-4",
-  "vehicleno": "제주79자7564",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 862,
-  "routeNm": "531-4",
-  "vehicleno": "제주79자7565",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 863,
-  "routeNm": "532-1",
-  "vehicleno": "제주79자7566",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 864,
-  "routeNm": "521-1",
-  "vehicleno": "제주79자7567",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 865,
-  "routeNm": "532-1",
-  "vehicleno": "제주79자7568",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- },
- {
-  "idx": 866,
-  "routeNm": "510-1",
-  "vehicleno": "제주79자7569",
-  "vehicletp": "대형승합차",
-  "vehiclelowtp": "저상버스",
-  "maximumnumber": 0,
-  "buscorporation": "서귀포운수(동서교통)"
- }
-]
-
 //지도 위도/경도 설정하기
 var mapLatitude = 33.4990652;
 var mapLongitude = 126.5307408;
@@ -1395,6 +107,20 @@ var busTimer;
 var lowBusTimer;
 var lowBusTimer2;
 
+var startArr = [];
+var endArr = [];
+
+var gpsmarkerdata = {};
+var gpsmarkers = [];
+var gpsOldArr = [];
+var gpsNewArr = [];
+var gpsSearchArr = [];
+var gpsSearchKeyword = "";
+var gpsTimer;
+var gpsStartArr = [];
+var gpsEndArr = [];
+var gpsUseFlag = "N";
+
 $(document).ready(function(){
     if ($(".contMap").length > 0) {
         window.map = new kakao.maps.Map($(".contMap")[0],{
@@ -1410,12 +136,12 @@ $(document).ready(function(){
 });
 
 //노선 마커
-function routeMarker(iwFlag, busFlag, routeId, smjson) {    
-	//노선 좌표 가져오기
+function routeMarker(iwFlag, busFlag, routeId, smjson, busId) {
+    busId = (busId != undefined) ? busId : "";
     
     stationMarker(iwFlag,"N","Y",smjson);
     
-    if (globalFileUrl.indexOf("/JWN/") == -1) {
+    if (globalFileUrl.indexOf("/JSC/") > -1) {
         if (busFlag == "Y") {
             for (var row in smjson)  {
                 globalRouteStationNm2[smjson[row].stationOrd] = smjson[row].stationNm;
@@ -1429,32 +155,64 @@ function routeMarker(iwFlag, busFlag, routeId, smjson) {
     
     var bounds = new kakao.maps.LatLngBounds();
     var linePath = [];
-
-    for (var row in smjson) {
-        if (smjson[row].localX != null && smjson[row].localY != null) {
-            var itemPos = new kakao.maps.LatLng(smjson[row].localY,smjson[row].localX);
-            bounds.extend(itemPos);
-            linePath.push(itemPos);
-        }
-    }
-    
+    var lineColor = "#d95f29";
     var lineOpacity = 1;
     
     if (globalFileUrl.indexOf("/JWN/") > -1) {
-    	lineOpacity = 0;
+        lowRouteJson.filter(function(obj) {
+            if (String(obj["routeId"]) === routeId) {
+                var routeCoordinateArr = obj["routeCoordinate"];
+
+                for (var row in routeCoordinateArr) {
+                    if (routeCoordinateArr[row].localX != null && routeCoordinateArr[row].localY != null) {
+                        var itemPos = new kakao.maps.LatLng(routeCoordinateArr[row].localY,routeCoordinateArr[row].localX);
+                        bounds.extend(itemPos);
+                        linePath.push(itemPos);
+                    }
+                }
+                
+                lineColor = (obj["routeDirection"] == "down") ? "#274475" : "#d95f29";
+            }
+        });
+        
+        if (linePath.length == 0) {
+            for (var row in smjson) {
+                if (smjson[row].localX != null && smjson[row].localY != null) {
+                    var itemPos = new kakao.maps.LatLng(smjson[row].localY,smjson[row].localX);
+                    bounds.extend(itemPos);
+                    linePath.push(itemPos);
+                }
+            }
+            
+            lineOpacity = 0;
+        }
+    } else {
+        for (var row in smjson) {
+            if (smjson[row].localX != null && smjson[row].localY != null) {
+                var itemPos = new kakao.maps.LatLng(smjson[row].localY,smjson[row].localX);
+                bounds.extend(itemPos);
+                linePath.push(itemPos);
+            }
+        }
     }
 
     var polyline = new kakao.maps.Polyline({
         path: linePath, // 선을 구성하는 좌표배열 입니다
         strokeWeight: 5, // 선의 두께 입니다
-        strokeColor: '#e43726', // 선의 색깔입니다
+        strokeColor: lineColor, // 선의 색깔입니다
         strokeOpacity: lineOpacity, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
         strokeStyle: 'solid' // 선의 스타일입니다
     });
 
     polyline.setMap(map);
     polylines.push(polyline);
-    map.setBounds(bounds);
+    
+    if (busId != "") {
+        map.setCenter(lowbusmarkerdata["lowbus-" + busId].getPosition());
+        map.setLevel(3);
+    } else {
+        map.setBounds(bounds);
+    }
     
     if (globalFileUrl.indexOf("/JWN/") > -1 && busFlag == "Y") {        
         setRouteStationVisible();
@@ -1477,7 +235,7 @@ function stationMarker(iwFlag, courseFlag, routeFlag, smjson) {
             mar.setMap(map);
             markers.push(mar);
             
-            var siwHtml = stationInfoWindow("start",smdata.stationId,smdata.stationNm,smdata.localY,smdata.localX,courseFlag);
+            var siwHtml = stationInfoWindow("start",smdata.stationId,smdata.stationNm,smdata.localY,smdata.localX,courseFlag,"N");
             
             mar.win = new kakao.maps.InfoWindow({
                 position: pos,
@@ -1492,24 +250,28 @@ function stationMarker(iwFlag, courseFlag, routeFlag, smjson) {
                     var dataItemTitle = mar.getTitle().split('-');
 
                     $(".infoWindowArea").css({display:"none"});
-                    $(".infoWindowArea").prev(".markerArea").removeClass("on");
-                    $(".stationInfoWindow").closest(".infoWindowArea").prev(".markerArea").children("img").attr("src",globalFilePath + "images/map-station.png");
+                    $(".markerArea").removeClass("on");
+                    $(".markerArea[id^='m-station-']").children("img").attr("src",globalFilePath + "images/map-station.png");
 
                     if (dataItemTitle.length > 1) {
                         var dataItemType = dataItemTitle[0];
                         var dataItemId = dataItemTitle[1];
                         
-                        stationInfoWindow("click",dataItemId,"","","","");
+                        stationInfoWindow("click",dataItemId,"","","","","N");
 
                         $(".infoWindowArea#iw-" + dataItemType + "-" + dataItemId).css({display:'block'});
-                        $(".infoWindowArea#iw-" + dataItemType + "-" + dataItemId).prev(".markerArea").addClass("on");
-                        $(".stationInfoWindow").closest(".infoWindowArea#iw-" + dataItemType + "-" + dataItemId).prev(".markerArea").children("img").attr("src",globalFilePath + "images/map-station-on.png");
+                        $(".markerArea#m-" + dataItemType + "-" + dataItemId).addClass("on");
+                        $(".markerArea#m-" + dataItemType + "-" + dataItemId).children("img").attr("src",globalFilePath + "images/map-station-on.png");
                         
                         if ($("ul.stationList>li a[data-station-id='" + dataItemId + "']").length > 0) {
                         	$("ul.stationList>li a[data-station-id='" + dataItemId + "']").parent("li").removeClass("on");
                         	$("ul.stationList>li a[data-station-id='" + dataItemId + "']").trigger("click");
                         }
                     }
+                    
+                    map.setDraggable(true);
+                    $(".mContMapArea").removeClass("on");
+                    $(".markerArea").children(".bmCircle").removeClass("on");
                     
                     map.setCenter(mar.getPosition());
                     map.setLevel(5);
@@ -1535,6 +297,192 @@ function stationMarker(iwFlag, courseFlag, routeFlag, smjson) {
         $(this).parent().parent().attr("id","iw-" + dataItemType + "-" + dataItemId);
         $(this).parent().parent().prev().addClass("markerArea");
         $(this).parent().parent().prev().attr("id","m-" + dataItemType + "-" + dataItemId);
+    });
+}
+
+//내위치기준 정류장 마커
+function gpsMarker(type, state, myLatitude, myLongitude, gmjson) {
+    var gpsNameArr = [];
+    
+    gpsOldArr = gpsNewArr;
+    gpsNewArr = [];
+    
+    if (gmjson != undefined) {
+        gmjson.forEach(gmdata=>{
+            if (gmdata.gpslong != null && gmdata.gpslati != null) {
+                var stationId = gmdata.nodeid.replace(globalCityName, "");
+                var pos = new kakao.maps.LatLng(gmdata.gpslati, gmdata.gpslong);
+
+                if (type == "route" || (type == "station" && (gpsSearchKeyword == "" || (gpsSearchKeyword !="" && gpsSearchArr.indexOf(stationId) > -1)))) {
+                    if (!gpsmarkerdata["gpsstation-" + stationId]) {
+                        //마커 생성시
+                        var mar = new kakao.maps.Marker({
+                            map: map,
+                            position: pos,
+                            title: "gpsstation-" + stationId,
+                            image: new kakao.maps.MarkerImage(globalFilePath + "images/map-station.png", new kakao.maps.Size(24,24), {offset: new kakao.maps.Point(12,12)})
+                        });
+
+                        mar.setMap(map);
+                        gpsmarkers[stationId] = mar;
+
+                        var siwHtml = stationInfoWindow("start",stationId,gmdata.nodenm,gmdata.gpslati,gmdata.gpslong,"N","Y");
+
+                        mar.win = new kakao.maps.InfoWindow({
+                            position: pos,
+                            content: siwHtml
+                            //disableAutoPan: true
+                        });
+
+                        mar.win.open(map, mar);
+
+                        kakao.maps.event.addListener(mar, "click", function() {
+                            var dataItemTitle = mar.getTitle().split('-');
+
+                            $(".infoWindowArea").css({display:"none"});
+                            $(".markerArea").removeClass("on");
+                            $(".markerArea[id^='m-gpsstation-']").children("img").attr("src",globalFilePath + "images/map-station.png");
+
+                            if (dataItemTitle.length > 1) {
+                                var dataItemType = dataItemTitle[0];
+                                var dataItemId = dataItemTitle[1];
+
+                                stationInfoWindow("click",dataItemId,"","","","","Y");
+
+                                $(".infoWindowArea#iw-" + dataItemType + "-" + dataItemId).css({display:'block'});
+                                $(".markerArea#m-" + dataItemType + "-" + dataItemId).addClass("on");
+                                $(".markerArea#m-" + dataItemType + "-" + dataItemId).children("img").attr("src",globalFilePath + "images/map-station-on.png");
+
+                                if ($("ul.stationList>li a[data-station-id='" + dataItemId + "']").length > 0) {
+                                    $("ul.stationList>li a[data-station-id='" + dataItemId + "']").parent("li").removeClass("on");
+                                    $("ul.stationList>li a[data-station-id='" + dataItemId + "']").trigger("click");
+                                }
+                            }
+
+                            map.setDraggable(true);
+                            $(".mContMapArea").removeClass("on");
+                            $(".markerArea").children(".bmCircle").removeClass("on");
+
+                            map.setCenter(mar.getPosition());
+                            map.setLevel(5);
+                        });
+
+                        gpsmarkerdata["gpsstation-" + stationId] = mar;
+
+                        gpsNameArr[stationId] = gmdata.nodenm;
+                        gpsNewArr.push(stationId);
+                    } else {
+                        //반복 호출시
+                        stationInfoWindow("loop",stationId,gmdata.nodenm,gmdata.gpslati,gmdata.gpslong,"N","Y");
+
+                        gpsmarkerdata["gpsstation-" + stationId].setPosition(pos);
+                        gpsmarkerdata["gpsstation-" + stationId].win.setPosition(pos);
+
+                        gpsNameArr[stationId] = gmdata.nodenm;
+                        gpsNewArr.push(stationId);
+
+                        if ($.inArray(stationId,gpsOldArr) > -1) {
+                            gpsOldArr.splice($.inArray(stationId,gpsOldArr),1);
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    if (type == "station") {
+        var gpsAddHtml = "";
+        
+        if ($("#mContList .mListInfoArea .mInfoMain>ul").length == 0) {
+            $("#mContList .mListInfoArea .mInfoMain").html("<ul class='stationList cf'></ul>");
+        }
+        
+        $("#mContList .mListInfoArea .mInfoMain>ul>li").each(function() {
+            if (gpsNewArr.indexOf($(this).children(".listTit").attr("data-station-id")) > -1) {
+                $(this).css("display","block");
+            } else {
+                if ($(this).hasClass("gpsStationItem")) {
+                    $(this).remove();
+                } else {
+                    $(this).css("display","none");
+                    $(this).removeClass("on");
+                    $(this).find(".routeTable").html("");
+                }
+            }
+        });
+        
+        for (var i in gpsNewArr) {
+            var gpsAddObj = $("#mContList .mListInfoArea .mInfoMain>ul>li>a[data-station-id='" + gpsNewArr[i] + "']").parent("li");
+            
+            if ($(gpsAddObj).length == 0) {
+                gpsAddHtml += "	 <li class='gpsStationItem'>";
+                gpsAddHtml += "    	 <a href='javascript:void(0);' data-station-id='" + gpsNewArr[i] + "' class='listTit' onclick='setMSIBL(this);'>";
+                gpsAddHtml += "	         <div class='tit'>" + gpsNameArr[gpsNewArr[i]] + "</div>";
+                gpsAddHtml += "            <div class='con'>" + gpsNewArr[i] + "</div>";
+                gpsAddHtml += "        </a>";
+                gpsAddHtml += "        <div class='routeTable'></div>";
+                gpsAddHtml += "    </li>";
+            }
+        }
+        
+        if (gpsAddHtml != "") {
+            $("#mContList .mListInfoArea .mInfoMain>ul").append(gpsAddHtml);
+        }
+        
+        for (var j in gpsOldArr) {
+            var gpsDelObj = $("#mContList .mListInfoArea .mInfoMain>ul>li>a[data-station-id='" + gpsOldArr[j] + "']").parent("li");
+            
+            if ($(gpsDelObj).hasClass("gpsStationItem")) {
+                $(gpsDelObj).remove();
+            } else {
+                $(gpsDelObj).css("display","none");
+                $(gpsDelObj).removeClass("on");
+                $(gpsDelObj).find(".routeTable").html("");
+            }
+        }
+        
+        if (gpsNewArr.length > 0) {
+            $("#mContList .mListInfoArea .mInfoMain .empty").css("display","none");
+        } else {
+            $("#mContList .mListInfoArea .mInfoMain .empty").remove();
+            
+            $("#mContList .mListInfoArea .mInfoMain").append("<div class='empty'>정류장정보가 없습니다.</div>");
+        }
+        
+        $("#mContList .mListInfoArea .mInfoTop .mInfoTitle .num").text(gpsNewArr.length);
+    }
+    
+    if (state == "start") {
+        map.setCenter(new kakao.maps.LatLng(myLatitude,myLongitude));
+        map.setLevel(5);
+    }
+    
+    for (var i in gpsOldArr) {
+        gpsmarkers[gpsOldArr[i]].setMap(null);
+        
+        delete gpsmarkerdata["gpsstation-" + gpsOldArr[i]];
+
+        $(".infoWindowArea#iw-gpsstation-" + gpsOldArr[i]).each(function() {
+            $(this).remove();
+        });
+
+        $(".markerArea#m-gpsstation-" + gpsOldArr[i]).each(function() {
+            $(this).remove();
+        });
+    }
+    
+    $(".stationInfoWindow").each(function() {
+        var dataItemType = $(this).attr("data-item-type");
+        var dataItemId = $(this).attr("data-item-id");
+        
+        if ($(this).parent().parent().attr("id") != "iw-" + dataItemType + "-" + dataItemId) {
+            $(this).parent().prev().css({display:"none"});
+            $(this).parent().parent().css({display:"none"});
+            $(this).parent().parent().addClass("infoWindowArea gpsInfoWindowArea");
+            $(this).parent().parent().attr("id","iw-" + dataItemType + "-" + dataItemId);
+            $(this).parent().parent().prev().addClass("markerArea gpsMarkerArea");
+            $(this).parent().parent().prev().attr("id","m-" + dataItemType + "-" + dataItemId);
+        }
     });
 }
 
@@ -1636,8 +584,9 @@ function busMarker(state, routeId) {
                         var dataItemTitle = mar.getTitle().split('-');
 
                         $(".infoWindowArea").css({display:"none"});
-                        $(".infoWindowArea").prev(".markerArea").removeClass("on");
-                        $(".stationInfoWindow").closest(".infoWindowArea").prev(".markerArea").children("img").attr("src",globalFilePath + "images/map-station.png");
+                        $(".markerArea").removeClass("on");
+                        $(".markerArea[id^='m-station-']").children("img").attr("src",globalFilePath + "images/map-station.png");
+                        $(".markerArea[id^='m-gpsstation-']").children("img").attr("src",globalFilePath + "images/map-station.png");
 
                         if (dataItemTitle.length > 1) {
                             var dataItemType = dataItemTitle[0];
@@ -1646,7 +595,7 @@ function busMarker(state, routeId) {
                             changeBusDrive("add","bus",$(".infoWindowArea#iw-bus-" + bmdata.vehicleno + " .busInfoWindow .biwCon .busDetail .busDetailBtn .busDrive"));
                             
                             $(".infoWindowArea#iw-" + dataItemType + "-" + dataItemId).css({display:'block'});
-                            $(".infoWindowArea#iw-" + dataItemType + "-" + dataItemId).prev(".markerArea").addClass("on");
+                            $(".markerArea#m-" + dataItemType + "-" + dataItemId).addClass("on");
                         }
                         
                         map.setCenter(mar.getPosition());
@@ -1740,6 +689,7 @@ function busMarker(state, routeId) {
                 busMarker("loop",routeId);
             }, 10000);
             
+            console.log("busMarkerEnd");
             $(".preloader").fadeOut(400);
         },
         fail: function(res) {
@@ -1825,6 +775,12 @@ function lowBusMarker(state, routeId, routeNm) {
                 }
                 
                 if (state == "start") {
+                    var startJson = {};
+                    
+                    startJson.lat = lbmdata.localY;
+                    startJson.lng = lbmdata.localX;
+                    startArr[lbmdata.vehicleno] = startJson;
+                    
                     //마커 생성시
                     var mar = new kakao.maps.Marker({
                         map: map,
@@ -1843,6 +799,8 @@ function lowBusMarker(state, routeId, routeNm) {
                         content: lbiwHtml
                         //disableAutoPan: true
                     });
+                    
+                    mar.lastAngle = (lbmdata.angle != 0) ? lbmdata.angle : 90;
 
                     mar.win.open(map, mar);
 
@@ -1850,17 +808,20 @@ function lowBusMarker(state, routeId, routeNm) {
                         var dataItemTitle = mar.getTitle().split('-');
 
                         $(".infoWindowArea").css({display:"none"});
-                        $(".infoWindowArea").prev(".markerArea").removeClass("on");
-                        $(".stationInfoWindow").closest(".infoWindowArea").prev(".markerArea").children("img").attr("src",globalFilePath + "images/map-station.png");
+                        $(".markerArea").removeClass("on");
+                        $(".markerArea[id^='m-station-']").children("img").attr("src",globalFilePath + "images/map-station.png");
+                        $(".markerArea[id^='m-gpsstation-']").children("img").attr("src",globalFilePath + "images/map-station.png");
 
                         if (dataItemTitle.length > 1) {
+                            setMRISL($("#mContList .mListInfoArea .mInfoMain>ul>li>.listTit[data-route-id='" + lbmdata.routeId + "']"),lbmdata.vehicleno);
+                            
                             var dataItemType = dataItemTitle[0];
                             var dataItemId = dataItemTitle[1];
                             
                             changeBusDrive("add","lowbus",$(".infoWindowArea#iw-lowbus-" + lbmdata.vehicleno + " .busInfoWindow .biwCon .busDetail .busDetailBtn .busDrive"));
                             
                             $(".infoWindowArea#iw-" + dataItemType + "-" + dataItemId).css({display:'block'});
-                            $(".infoWindowArea#iw-" + dataItemType + "-" + dataItemId).prev(".markerArea").addClass("on");
+                            $(".markerArea#m-" + dataItemType + "-" + dataItemId).addClass("on");
                         }
                         
                         if (globalFileUrl.indexOf("/mobile/") > -1) {
@@ -1871,12 +832,28 @@ function lowBusMarker(state, routeId, routeNm) {
                             $("#contList .listBtnArea #arrowBtn").find("i").attr("class", "fas fa-chevron-up");
                         }
                         
-                        map.setCenter(mar.getPosition());
-                        map.setLevel(3);
+                        $(startArr[lbmdata.vehicleno]).stop().animate(endArr[lbmdata.vehicleno], {
+                            easing :'linear', queue:false,  
+                                step: function(now,fx) {
+                                    map.setCenter(mar.getPosition());
+                                    map.setLevel(3);
+                                }
+                            }
+                        );
                     });
                     
                     kakao.maps.event.addListener(map, "dragend", function() {
-                        changeBusDrive("remove","lowbus",$(".infoWindowArea#iw-lowbus-" + lbmdata.vehicleno + " .busInfoWindow .biwCon .busDetail .busDetailBtn .busDrive"));
+                        //changeBusDrive("remove","lowbus",$(".infoWindowArea#iw-lowbus-" + lbmdata.vehicleno + " .busInfoWindow .biwCon .busDetail .busDetailBtn .busDrive"));
+                    });
+                    
+                    kakao.maps.event.addListener(map, "zoom_changed", function() {
+                        $(".mContMapArea").removeClass("on");
+                        
+                        if ($(".busMarkerArea.on + .infoWindowArea .busInfoWindow .biwCon .busDetail .busDetailBtn .busDrive.on").length > 0) {
+                            setTimeout(function() {
+                                $(".mContMapArea").addClass("on");
+                            }, 200);
+                        }
                     });
 
                     lowbusmarkerdata["lowbus-" + lbmdata.vehicleno] = mar;
@@ -1901,15 +878,23 @@ function lowBusMarker(state, routeId, routeNm) {
                         listCnt++;
                 	}
                 } else {
+                    var bounds = map.getBounds();
+                    var minlat = bounds.ha;
+                    var maxlat = bounds.oa;
+                    var minlng = bounds.qa;
+                    var maxlng = bounds.pa;
+                    
+                    var endJson = {};
+                    
+                    endJson.lat = lbmdata.localY;
+                    endJson.lng = lbmdata.localX;
+                    endArr[lbmdata.vehicleno] = endJson;
+                    
                     //반복 호출시
                     lowBusInfoWindow("loop",lbmdata);
                     
                     lowbusmarkerdata["lowbus-" + lbmdata.vehicleno].setPosition(pos);
                     lowbusmarkerdata["lowbus-" + lbmdata.vehicleno].win.setPosition(pos);
-                    
-                    if ($(".busMarkerArea.on + .infoWindowArea#iw-lowbus-" + lbmdata.vehicleno + " .busInfoWindow .biwCon .busDetail .busDetailBtn .busDrive.on").length > 0) {
-                    	map.panTo(pos);
-                    }
                     
                     var lowBusAngle = 90;
                     
@@ -1919,8 +904,25 @@ function lowBusMarker(state, routeId, routeNm) {
                     	lowBusAngle = lowbusmarkerdata["lowbus-" + lbmdata.vehicleno].lastAngle;
                     }
                     
-                    $(".infoWindowArea#iw-lowbus-" + lbmdata.vehicleno).prev(".markerArea").children("img").css({"transform":"rotate(" + lowBusAngle + "deg)","transform-origin":"center"});
+                    $(".markerArea#m-lowbus-" + lbmdata.vehicleno).children("img").css({"transform":"rotate(" + lowBusAngle + "deg)","transform-origin":"center"});
                     lowbusmarkerdata["lowbus-" + lbmdata.vehicleno].lastAngle = lowBusAngle;
+                    
+                    if ($(".busMarkerArea.on + .infoWindowArea#iw-lowbus-" + lbmdata.vehicleno + " .busInfoWindow .biwCon .busDetail .busDetailBtn .busDrive.on").length > 0) {
+                    	$(startArr[lbmdata.vehicleno]).stop().animate(endArr[lbmdata.vehicleno], {
+                            easing :'linear', queue:false,  
+                                step: function(now,fx) {
+                                    map.panTo(pos);
+                                }
+                            }
+                        );
+                    }
+                    
+                    if (minlat <= lbmdata.localX && maxlat >= lbmdata.localX && minlng <= lbmdata.localY && maxlng >= lbmdata.localY) {
+                        
+                    } else {
+                        startArr[lbmdata.vehicleno].lat = endArr[lbmdata.vehicleno].lat;
+                        startArr[lbmdata.vehicleno].lng = endArr[lbmdata.vehicleno].lng;
+                    }
                     
                     /*var lowBusLatlng = lowbusmarkerdata["lowbus-" + lbmdata.vehicleno].getPosition();
                 	var lowBusLat = lowBusLatlng.getLat();
@@ -2101,8 +1103,18 @@ function lowBusMarker(state, routeId, routeNm) {
                     $(this).parent().parent().prev().addClass("markerArea busMarkerArea lowBusMarkerArea m-" + dataItemType + "-route-" + dataItemRouteId);
                     $(this).parent().parent().prev().attr("id","m-" + dataItemType + "-" + dataItemId);
                     
+                    $(".markerArea#m-lowbus-" + dataItemId).children("img").css({"transform":"rotate(" + lowbusmarkerdata["lowbus-" + dataItemId].lastAngle + "deg)","transform-origin":"center"});
+                    
+                    if ($(".mContMapArea").length == 0) {
+                        $(this).parent().parent().parent().parent().addClass("mContMapArea");
+                    }
+                    
                     if ($(".markerArea#m-" + dataItemType + "-" + dataItemId + " .bmTit").length == 0) {
                     	$(".markerArea#m-" + dataItemType + "-" + dataItemId).append("<div class='bmTit'>" + dataItemId + "</div>");
+                    }
+                    
+                    if ($(".markerArea#m-" + dataItemType + "-" + dataItemId + " .bmCircle").length == 0) {
+                    	$(".markerArea#m-" + dataItemType + "-" + dataItemId).append("<div class='bmCircle'></div>");
                     }
                 }
             });
@@ -2125,7 +1137,7 @@ function lowBusMarker(state, routeId, routeNm) {
                 lowBusMarker("loop");
             }, 600);
             
-            $(".preloader").fadeOut(400);
+            //$(".preloader").fadeOut(400);
             
             //검색할 때 엔터키 submit 막기
 	        $("input[name='keyword']").keydown(function(event) {
@@ -2167,19 +1179,20 @@ function lowBusMarker(state, routeId, routeNm) {
 }
 
 //정류장 인포윈도우
-function stationInfoWindow(state, stationId, stationName, stationLatitude, stationLongitude, courseFlag) {
+function stationInfoWindow(state, stationId, stationName, stationLatitude, stationLongitude, courseFlag, gpsFlag) {
+    var type = (gpsFlag == "Y") ? "gpsstation" : "station";
     var siwHtml = "";
     var resultArr = [];
     
     if (state == "start") {
         //마커 생성시
-        siwHtml += "<div class='stationInfoWindow' data-item-type='station' data-item-id='" + stationId + "'>";
+        siwHtml += "<div class='stationInfoWindow' data-item-type='" + type + "' data-item-id='" + stationId + "'>";
         siwHtml += "    <div class='siwTop'>";
         siwHtml += "        <div class='siwTit'>";
         siwHtml += "            " + stationName + "";
         siwHtml += "            <span>" + stationId + "</span>";
         siwHtml += "        </div>";
-        siwHtml += "        <div class='close' onclick='closeInfoWindow(\"station\",this);'><img src='" + globalFilePath + "images/menu_top_close.png' alt='info-window-close'></div>";
+        siwHtml += "        <div class='close' onclick='closeInfoWindow(\"" + type + "\",this);'><img src='" + globalFilePath + "images/menu_top_close.png' alt='info-window-close'></div>";
         siwHtml += "    </div>";
         siwHtml += "    <div class='siwCon'>";
         siwHtml += "        <div class='routeTable" + (courseFlag == "Y" ? " courseTable" : "") + "'>";
@@ -2275,12 +1288,13 @@ function stationInfoWindow(state, stationId, stationName, stationLatitude, stati
                     siwHtml += "</tr>";
                 }
                 
-                $(".infoWindowArea#iw-station-" + stationId + " .stationInfoWindow .siwCon .routeTable .table tbody").html(siwHtml);
+                $(".infoWindowArea#iw-" + type + "-" + stationId + " .stationInfoWindow .siwCon .routeTable .table tbody").html(siwHtml);
 
                 stationTimer = setTimeout(function() {
-                    stationInfoWindow("loop",stationId,"","","","");
+                    stationInfoWindow("loop",stationId,"","","","",gpsFlag);
                 }, 10000);
-
+                
+                console.log("stationInfoWindowClickEnd");
                 $(".preloader").fadeOut(400);
             },
             fail: function(res) {
@@ -2367,12 +1381,13 @@ function stationInfoWindow(state, stationId, stationName, stationLatitude, stati
                         siwHtml += "</tr>";
                     }
 
-                    $(".infoWindowArea#iw-station-" + stationId + " .stationInfoWindow .siwCon .routeTable .table tbody").html(siwHtml);
+                    $(".infoWindowArea#iw-" + type + "-" + stationId + " .stationInfoWindow .siwCon .routeTable .table tbody").html(siwHtml);
 
                     stationTimer = setTimeout(function() {
-                        stationInfoWindow("loop",stationId,"","","","");
+                        stationInfoWindow("loop",stationId,"","","","",gpsFlag);
                     }, 10000);
-
+                    
+                    console.log("stationInfoWindowLoopEnd");
                     $(".preloader").fadeOut(400);
                 },
                 fail: function(res) {
@@ -2496,7 +1511,8 @@ function stationInfoWindow2(stationId) {
                 stationTimer2 = setTimeout(function() {
                     stationInfoWindow2(dataStationId);
                 }, 10000);
-
+                
+                console.log("stationInfoWindow2End");
                 $(".preloader").fadeOut(400);
             },
             fail: function(res) {
@@ -2606,11 +1622,19 @@ function lowBusInfoWindow(state, data) {
 
 //인포윈도우 닫기
 function closeInfoWindow(type, obj) {
-    $(obj).closest(".infoWindowArea").css({display:"none"});
-    $(obj).closest(".infoWindowArea").prev(".markerArea").removeClass("on");
+    var markerId = $(obj).closest(".infoWindowArea").attr("id").replace("iw-","m-");
     
-    if (type == "station") {
-        $(obj).closest(".infoWindowArea").prev(".markerArea").children("img").attr("src",globalFilePath + "images/map-station.png");
+    $(obj).closest(".infoWindowArea").css({display:"none"});
+    $(".markerArea#" + markerId).removeClass("on");
+    
+    if (type == "station" || type == "gpsstation") {
+        $(".markerArea#" + markerId).children("img").attr("src",globalFilePath + "images/map-station.png");
+    }
+    
+    if (type == "lowbus") {
+        map.setDraggable(true);
+        $(".mContMapArea").removeClass("on");
+        $(".markerArea#" + markerId).children(".bmCircle").removeClass("on");
     }
 }
 
@@ -2623,6 +1647,12 @@ function changeBusDrive(state, type, obj) {
         if ($(obj).hasClass("on")) {
             $(obj).removeClass("on");
             $(obj).find("img").attr("src", globalFilePath + "images/btn-iw-drive.png");
+            
+            if (type == "lowbus") {
+                map.setDraggable(true);
+                $(".mContMapArea").removeClass("on");
+                $(".markerArea#m-" + type + "-" + dataItemId).children(".bmCircle").removeClass("on");
+            }
         } else {
             $(obj).addClass("on");
             $(obj).find("img").attr("src", globalFilePath + "images/btn-iw-drive-on.png");
@@ -2631,6 +1661,15 @@ function changeBusDrive(state, type, obj) {
             	map.setCenter(markerdata[type + "-" + dataItemId].getPosition());
             } else if (type == "lowbus") {
             	map.setCenter(lowbusmarkerdata[type + "-" + dataItemId].getPosition());
+                map.setDraggable(false);
+                
+                $(".mContMapArea").removeClass("on");
+                $(".markerArea").children(".bmCircle").removeClass("on");
+                
+                setTimeout(function() {
+                    $(".mContMapArea").addClass("on");
+                    $(".markerArea#m-" + type + "-" + dataItemId).children(".bmCircle").addClass("on");
+                }, 200);
             }
         }
     } else if (state == "add") {
@@ -2647,18 +1686,29 @@ function changeBusDrive(state, type, obj) {
         //맵 이동시
         $(obj).removeClass("on");
         $(obj).find("img").attr("src", globalFilePath + "images/btn-iw-drive.png");
+        
+        if (type == "lowbus") {
+            map.setDraggable(true);
+            $(".mContMapArea").removeClass("on");
+            $(".markerArea#m-" + type + "-" + dataItemId).children(".bmCircle").removeClass("on");
+        }
     }
 }
 
 //지도에서 위치보기
 function markerPosition(type, id, iwFlag) {
     if (iwFlag == "Y") {
-        $(".infoWindowArea").css({display:"none"});
-        $(".infoWindowArea").prev(".markerArea").removeClass("on");
-        $(".stationInfoWindow").closest(".infoWindowArea").prev(".markerArea").children("img").attr("src",globalFilePath + "images/map-station.png");
+        if (type == "station" && $(".mGpsBtn").hasClass("on")) {
+            type = "gpsstation";
+        }
         
-        if (type == "station") {
-            stationInfoWindow("click",id,"","","","");
+        $(".infoWindowArea").css({display:"none"});
+        $(".markerArea").removeClass("on");
+        $(".markerArea[id^=m-station-]").children("img").attr("src",globalFilePath + "images/map-station.png");
+        $(".markerArea[id^=m-gpsstation-]").children("img").attr("src",globalFilePath + "images/map-station.png");
+        
+        if (type == "station" || type == "gpsstation") {
+            stationInfoWindow("click",id,"","","","",(type == "gpsstation" ? "Y" : "N"));
             stationInfoWindow2(id);
         }
         
@@ -2671,15 +1721,21 @@ function markerPosition(type, id, iwFlag) {
         }
         
         $(".infoWindowArea#iw-" + type + "-" + id).css({display:'block'});
-        $(".infoWindowArea#iw-" + type + "-" + id).prev(".markerArea").addClass("on");
+        $(".markerArea#m-" + type + "-" + id).addClass("on");
 
-        if (type == "station") {
-            $(".stationInfoWindow").closest(".infoWindowArea#iw-" + type + "-" + id).prev(".markerArea").children("img").attr("src",globalFilePath + "images/map-station-on.png");
+        if (type == "station" || type == "gpsstation") {
+            $(".markerArea#m-" + type + "-" + id).children("img").attr("src",globalFilePath + "images/map-station-on.png");
         }
         
-        map.setCenter(markerdata[type + "-" + id].getPosition());
+        if (type == "gpsstation"){
+            map.setCenter(gpsmarkerdata[type + "-" + id].getPosition());
+        } else if (type == "lowbus") {
+            map.setCenter(lowbusmarkerdata[type + "-" + id].getPosition());
+        } else {
+            map.setCenter(markerdata[type + "-" + id].getPosition());
+        }
 
-        if (type == "station") {
+        if (type == "station" || type == "gpsstation") {
             map.setLevel(5);
         } else {
             map.setLevel(3);
@@ -2705,27 +1761,367 @@ function markerPosition(type, id, iwFlag) {
 
 //노선검색에서 정류장 노출여부
 function setRouteStationVisible() {
-	if ($("#infoVisible").is(":checked")) {
-		$(".infoWindowArea[id^='iw-station-']").prev(".markerArea").removeClass("not-visible");
+	if ($("#infoVisible").is(":checked") && !$(".mGpsBtn").hasClass("on")) {
+		$(".markerArea[id^='m-station-']").removeClass("not-visible");
 	} else {
 		$(".infoWindowArea[id^='iw-station-']").css({display:"none"});
-        $(".infoWindowArea[id^='iw-station-']").prev(".markerArea").removeClass("on");
-        $(".infoWindowArea[id^='iw-station-']").prev(".markerArea").addClass("not-visible");
-        $(".stationInfoWindow").closest(".infoWindowArea").prev(".markerArea").children("img").attr("src",globalFilePath + "images/map-station.png");
+        $(".markerArea[id^='m-station-']").removeClass("on");
+        $(".markerArea[id^='m-station-']").addClass("not-visible");
+        $(".markerArea[id^='m-station-']").children("img").attr("src",globalFilePath + "images/map-station.png");
 	}
 }
 
 //노선검색(휠네비)에서 노선선택시 해당 노선의 버스만 노출
-function setRouteBusVisible(routeId) {
+function setRouteBusVisible(routeId, busId) {
+    busId = (busId != undefined) ? busId : "";
+    
 	if (routeId != undefined) {
 		$(".lowBusInfoWindowArea").css({display:"none"});
-        $(".lowBusInfoWindowArea").prev(".lowBusMarkerArea").removeClass("on");
-        $(".lowBusInfoWindowArea").prev(".lowBusMarkerArea").addClass("not-visible");
-        $(".lowBusInfoWindowArea.iw-lowbus-route-" + routeId).prev(".lowBusMarkerArea").removeClass("not-visible");
-        $(".stationInfoWindow").closest(".infoWindowArea").prev(".markerArea").children("img").attr("src",globalFilePath + "images/map-station.png");
+        $(".lowBusMarkerArea").removeClass("on");
+        $(".lowBusMarkerArea").addClass("not-visible");
+        
+        if (busId != "") {
+            $(".lowBusInfoWindowArea#iw-lowbus-" + busId).css({display:'block'});
+            $(".lowBusMarkerArea#m-lowbus-" + busId).addClass("on");
+        }
+        
+        $(".lowBusMarkerArea.m-lowbus-route-" + routeId).removeClass("not-visible");
+        $(".markerArea[id^='m-station-']").children("img").attr("src",globalFilePath + "images/map-station.png");
+        $(".markerArea[id^='m-gpsstation-']").children("img").attr("src",globalFilePath + "images/map-station.png");
 	} else {
-		$(".lowBusInfoWindowArea").prev(".lowBusMarkerArea").removeClass("not-visible");
+		$(".lowBusMarkerArea").removeClass("not-visible");
 	}
+    
+    if (busId != "") {
+        map.setDraggable(false);
+        $(".mContMapArea").removeClass("on");
+        $(".markerArea").children(".bmCircle").removeClass("on");
+        
+        if ($(".busMarkerArea.on + .infoWindowArea .busInfoWindow .biwCon .busDetail .busDetailBtn .busDrive.on").length > 0) {
+            setTimeout(function() {
+                $(".mContMapArea").addClass("on");
+                $(".lowBusMarkerArea#m-lowbus-" + busId).children(".bmCircle").addClass("on");
+            }, 200);
+        }
+    } else {
+        if ($(".busMarkerArea.on + .infoWindowArea .busInfoWindow .biwCon .busDetail .busDetailBtn .busDrive.on").length == 0) {
+            map.setDraggable(true);
+            $(".mContMapArea").removeClass("on");
+            $(".markerArea").children(".bmCircle").removeClass("on");
+        }
+    }
+    
+    console.log("setRouteBusVisibleEnd");
+    $(".preloader").fadeOut(400);
+}
+
+//내위치 켜기&끄기
+function setGpsPosition(obj,type) {
+    clearTimeout(gpsTimer);
+    
+    if ($(obj).hasClass("on")) {
+        //내위치 끄기
+        $(obj).removeClass("on");
+        gpsUseFlag = "N";
+        gpsNewArr = [];
+        
+        if (type == "route") {
+            $("#infoVisible").prop("disabled",false);
+            setRouteStationVisible();
+        } else if (type == "station") {
+            $("#myPosition").prop("checked",false);
+            $(".markerArea[id^='m-station-']").removeClass("not-visible");
+            
+            $("#mContList .mListInfoArea .mInfoMain>ul>li").each(function() {
+                if ($(this).hasClass("gpsStationItem")) {
+                    $(this).remove();
+                } else {
+                    $(this).css("display","");
+                    $(this).removeClass("on");
+                    $(this).find(".routeTable").html("");
+                }
+            });
+            
+            $("#mContList .mListInfoArea .mInfoTop .mInfoTitle .num").text($("#mContList .mListInfoArea .mInfoMain>ul>li").length);
+        }
+    } else {
+        //내위치 켜기
+        $(obj).addClass("on");
+        gpsUseFlag = "Y";
+        
+        if (type == "route") {
+            $("#infoVisible").prop("disabled",true);
+            setRouteStationVisible();
+        } else if (type == "station") {
+            $("#myPosition").prop("checked",true);
+        }
+    }
+    
+    setGpsPosition2(type,"start");
+}
+
+//내위치 반복호출
+function setGpsPosition2(type,state) {
+    if (gpsUseFlag == "Y") {
+        //HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+        if (navigator.geolocation) {
+            //GeoLocation을 이용해서 접속 위치를 얻어옵니다
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var myLatitude = position.coords.latitude; //33.4990652; //33.361310006006974;
+                var myLongitude = position.coords.longitude; //126.5307408; //126.52938551082988;
+
+                if (type == "route" || type == "station") {
+                    if (state == "start") {
+                        console.log("setGpsPosition2Start");
+                        $(".preloader").addClass("opacity");
+                        $(".preloader").css("display","block");
+                    }
+
+                    if (type == "station" && state == "start") {
+                        $(".infoWindowArea[id^='iw-station-']").css({display:"none"});
+                        $(".markerArea[id^='m-station-']").removeClass("on");
+                        $(".markerArea[id^='m-station-']").addClass("not-visible");
+                        $(".markerArea[id^='m-station-']").children("img").attr("src",globalFilePath + "images/map-station.png");
+                        $(".markerArea[id^='m-gpsstation-']").children("img").attr("src",globalFilePath + "images/map-station.png");
+
+                        $("#mContList .mListInfoArea .mInfoMain>ul>li").removeClass("on");
+                        $("#mContList .mListInfoArea .mInfoMain>ul>li").find(".routeTable").html("");
+                    }
+
+                    //내위치기준 정류장 조회
+                    $.ajax({
+                        dataType: "json",
+                        type: "GET",
+                        url: "http://apis.data.go.kr/1613000/BusSttnInfoInqireService/getCrdntPrxmtSttnList?serviceKey=" + globalServiceKey2 + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo + "&_type=json&gpsLati=" + myLatitude + "&gpsLong=" + myLongitude,
+                        success: function(result) {
+                            //console.log(result.response.body.items.item);
+                            var gmjson = result.response.body.items.item;
+
+                            //내위치 설정
+                            var mypos = new kakao.maps.LatLng(myLatitude, myLongitude);
+
+                            if (!gpsmarkerdata["gpsposition"]) {
+                                var startJson = {};
+
+                                startJson.lat = myLatitude;
+                                startJson.lng = myLongitude;
+                                gpsStartArr["gpsposition"] = startJson;
+
+                                //마커 생성시
+                                var mymar = new kakao.maps.Marker({
+                                    map: map,
+                                    position: mypos,
+                                    title: "gpsposition",
+                                    image: new kakao.maps.MarkerImage(globalFilePath + "images/my-position.png", new kakao.maps.Size(36,36), {offset: new kakao.maps.Point(18,18)})
+                                });
+
+                                mymar.setMap(map);
+                                gpsmarkers.push(mymar);
+
+                                gpsmarkerdata["gpsposition"] = mymar;
+
+                                map.setCenter(new kakao.maps.LatLng(myLatitude,myLongitude));
+                                map.setLevel(5);
+                            } else {
+                                var bounds = map.getBounds();
+                                var minlat = bounds.ha;
+                                var maxlat = bounds.oa;
+                                var minlng = bounds.qa;
+                                var maxlng = bounds.pa;
+
+                                var endJson = {};
+
+                                endJson.lat = myLatitude;
+                                endJson.lng = myLongitude;
+                                gpsEndArr["gpsposition"] = endJson;
+
+                                //반복 호출시
+                                gpsmarkerdata["gpsposition"].setPosition(mypos);
+
+                                if (minlat <= myLongitude && maxlat >= myLongitude && minlng <= myLatitude && maxlng >= myLatitude) {
+
+                                } else {
+                                    gpsStartArr["gpsposition"].lat = gpsEndArr["gpsposition"].lat;
+                                    gpsStartArr["gpsposition"].lng = gpsEndArr["gpsposition"].lng;
+                                }
+                            }
+
+                            $("#mContMap img[title='gpsposition']").parent().addClass("markerArea gpsposMarkerArea");
+
+                            gpsMarker(type,state,myLatitude,myLongitude,gmjson);
+
+                            gpsTimer = setTimeout(function() {
+                                setGpsPosition2(type,"loop");
+                            }, 6000);
+
+                            if (state == "start") {
+                                console.log("setGpsPosition2End");
+                                $(".preloader").fadeOut(400);
+                            }
+                        },
+                        fail: function(res) {
+                            if (res.readyState != 0 || res.status != 0) {
+                                if (!(res.status == 0 && res.statusText == "abort")) {
+                                    //alert("관리자에게 다음사항을 문의하세요.<br>DataList (fail): " + res.status + " - " + res.statusText);
+                                    openLayer("alert","관리자에게 다음사항을 문의하세요.<br>DataList (fail): " + res.status + " - " + res.statusText,"");
+                                }
+                            }
+
+                            $(".preloader").fadeOut(400);
+                        },
+                        error: function(res) {
+                            if (res.readyState != 0 || res.status != 0) {
+                                if (!(res.status == 0 && res.statusText == "abort")) {
+                                    //alert("관리자에게 다음사항을 문의하세요.<br>DataList (error): " + res.status + " - " + res.statusText);
+                                    openLayer("alert","관리자에게 다음사항을 문의하세요.<br>DataList (error): " + res.status + " - " + res.statusText,"");
+                                }
+                            }
+
+                            $(".preloader").fadeOut(400);
+                        }
+                    });
+                } else {
+                    //내위치 설정
+                    var mypos = new kakao.maps.LatLng(myLatitude, myLongitude);
+
+                    if (!gpsmarkerdata["gpsposition"]) {
+                        var startJson = {};
+
+                        startJson.lat = myLatitude;
+                        startJson.lng = myLongitude;
+                        gpsStartArr["gpsposition"] = startJson;
+
+                        //마커 생성시
+                        var mymar = new kakao.maps.Marker({
+                            map: map,
+                            position: mypos,
+                            title: "gpsposition",
+                            image: new kakao.maps.MarkerImage(globalFilePath + "images/my-position.png", new kakao.maps.Size(36,36), {offset: new kakao.maps.Point(18,18)})
+                        });
+
+                        mymar.setMap(map);
+                        gpsmarkers.push(mymar);
+
+                        gpsmarkerdata["gpsposition"] = mymar;
+
+                        map.setCenter(new kakao.maps.LatLng(myLatitude,myLongitude));
+                        map.setLevel(5);
+                    } else {
+                        var bounds = map.getBounds();
+                        var minlat = bounds.ha;
+                        var maxlat = bounds.oa;
+                        var minlng = bounds.qa;
+                        var maxlng = bounds.pa;
+
+                        var endJson = {};
+
+                        endJson.lat = myLatitude;
+                        endJson.lng = myLongitude;
+                        gpsEndArr["gpsposition"] = endJson;
+
+                        //반복 호출시
+                        gpsmarkerdata["gpsposition"].setPosition(mypos);
+
+                        if (minlat <= myLongitude && maxlat >= myLongitude && minlng <= myLatitude && maxlng >= myLatitude) {
+
+                        } else {
+                            gpsStartArr["gpsposition"].lat = gpsEndArr["gpsposition"].lat;
+                            gpsStartArr["gpsposition"].lng = gpsEndArr["gpsposition"].lng;
+                        }
+                    }
+
+                    $("#mContMap img[title='gpsposition']").parent().addClass("markerArea gpsposMarkerArea");
+
+                    gpsTimer = setTimeout(function() {
+                        setGpsPosition2(type,"loop");
+                    }, 6000);
+                }
+            }, function(error) {
+                if (error.code == 1) {
+                    setGpsPosition3(type,"내위치에 대한 권한이 없습니다.<br>권한을 허용해주세요.");
+                } else if (error.code == 2) {
+                    setGpsPosition3(type,"에러가 발생했습니다.<br>다시 시도해주세요.");
+                } else if (error.code == 3) {
+                    setGpsPosition3(type,"시간이 초과되었습니다.<br>다시 시도해주세요.");
+                }
+            });
+        } else {
+            setGpsPosition3(type,"내위치를 알 수 없습니다.");
+        }
+    } else {
+        if (type == "station") {
+            $("#mContList .mListInfoArea .mInfoMain>ul>li").each(function() {
+                if ($(this).hasClass("gpsStationItem")) {
+                    $(this).remove();
+                } else {
+                    $(this).css("display","block");
+                    $(this).removeClass("on");
+                    $(this).find(".routeTable").html("");
+                }
+            });
+            
+            var listCnt = $("#mContList .mListInfoArea .mInfoMain>ul>li").length;
+            
+            if (listCnt > 0) {
+                $("#mContList .mListInfoArea .mInfoMain .empty").css("display","none");
+            } else {
+                $("#mContList .mListInfoArea .mInfoMain .empty").remove();
+                
+                if (gpsSearchKeyword != "") {
+                    $("#mContList .mListInfoArea .mInfoMain").append("<div class='empty'>정류장정보가 없습니다.</div>");
+                } else {
+                    $("#mContList .mListInfoArea .mInfoMain").append("<div class='empty'>정류장을 검색해주세요.</div>");
+                }
+            }
+            
+            $("#mContList .mListInfoArea .mInfoTop .mInfoTitle .num").text(listCnt);
+        }
+        
+        removeGpsMarker();
+    }
+}
+
+//내위치 호출실패
+function setGpsPosition3(type,msg) {
+    openLayer("alert",msg,"");
+    
+    $(".mGpsBtn").removeClass("on");
+    gpsUseFlag = "N";
+    gpsNewArr = [];
+
+    if (type == "route") {
+        $("#infoVisible").prop("disabled",false);
+        setRouteStationVisible();
+    } else if (type == "station") {
+        $("#myPosition").prop("checked",false);
+        $(".markerArea[id^='m-station-']").removeClass("not-visible");
+
+        $("#mContList .mListInfoArea .mInfoMain>ul>li").each(function() {
+            if ($(this).hasClass("gpsStationItem")) {
+                $(this).remove();
+            } else {
+                $(this).css("display","block");
+                $(this).removeClass("on");
+                $(this).find(".routeTable").html("");
+            }
+        });
+
+        var listCnt = $("#mContList .mListInfoArea .mInfoMain>ul>li").length;
+
+        if (listCnt > 0) {
+            $("#mContList .mListInfoArea .mInfoMain .empty").css("display","none");
+        } else {
+            $("#mContList .mListInfoArea .mInfoMain .empty").remove();
+
+            if (gpsSearchKeyword != "") {
+                $("#mContList .mListInfoArea .mInfoMain").append("<div class='empty'>정류장정보가 없습니다.</div>");
+            } else {
+                $("#mContList .mListInfoArea .mInfoMain").append("<div class='empty'>정류장을 검색해주세요.</div>");
+            }
+        }
+
+        $("#mContList .mListInfoArea .mInfoTop .mInfoTitle .num").text(listCnt);
+    }
 }
 
 //지도위에 표시되고 있는 마커를 모두 제거
@@ -2746,19 +2142,19 @@ function removeMarker() {
     
     markerdata = {};
     
-    $(".infoWindowArea:not(.lowBusInfoWindowArea)").each(function() {
+    $(".infoWindowArea:not(.lowBusInfoWindowArea,.gpsInfoWindowArea)").each(function() {
         $(this).remove();
     });
     
-    $(".markerArea:not(.lowBusMarkerArea)").each(function() {
+    $(".markerArea:not(.lowBusMarkerArea,.gpsMarkerArea,.gpsposMarkerArea)").each(function() {
         $(this).remove();
     });
     
-    $(".lowBusInfoWindowArea").each(function() {
+    $(".lowBusInfoWindowArea,.gpsInfoWindowArea").each(function() {
         $(this).css({display:"none"});
     });
     
-    $(".lowBusMarkerArea").each(function() {
+    $(".lowBusMarkerArea,.gpsMarkerArea,.gpsposMarkerArea").each(function() {
         $(this).removeClass("on");
     });
 }
@@ -2781,6 +2177,27 @@ function removeLowBusMarker() {
     });
     
     $(".lowBusMarkerArea").each(function() {
+        $(this).remove();
+    });
+}
+
+//지도위에 표시되고 있는 내위치기준 정류장마커를 모두 제거
+function removeGpsMarker() {
+    clearTimeout(gpsTimer);
+    
+    for (var i in gpsmarkers) {
+    	gpsmarkers[i].setMap(null);
+    }
+    
+    gpsmarkers = [];
+    
+    gpsmarkerdata = {};
+    
+    $(".gpsInfoWindowArea").each(function() {
+        $(this).remove();
+    });
+    
+    $(".gpsMarkerArea,.gpsposMarkerArea").each(function() {
         $(this).remove();
     });
 }
