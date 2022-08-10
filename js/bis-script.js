@@ -113,10 +113,16 @@ $(document).ready(function(){
     $("#infoVisible").change(function() {
     	setRouteStationVisible();
     });
+    
+    //정류장검색에서 현위치기준 검색 체크여부
+    $("#myPosition").click(function() {
+        $(".mGpsBtn").trigger("click");
+    });
 });
 
 //정류장 도착정보에 필요한 노선정보 조회
 function getRouteStationNm() {
+    console.log("getRouteStationNmStart");
     $(".preloader").addClass("opacity");
     $(".preloader").css("display","block");
     
@@ -135,6 +141,7 @@ function getRouteStationNm() {
                 globalRouteStationNm[routeId] = $(this).find("startnodenm").text() + "<i class='fas fa-arrows-alt-h'></i>" + $(this).find("endnodenm").text();
             });
             
+            console.log("getRouteStationNmEnd");
             $(".preloader").fadeOut(400);
         },
         fail: function(res) {
@@ -167,14 +174,16 @@ function setListBtnTab(obj) {
     var resultJson = {};
     
     if (dataType == "route") {
-    	$(".preloader").removeClass("opacity");
-    	$(".preloader").css("display","block");
-        
         if (globalFileUrl.indexOf("/JWN/") > -1) {
             removeMarker();
 	        removeLowBusMarker();
+            removePolyline();
 	        lowBusMarker("start");
         } else {
+            console.log("setListBtnTabStart");
+            $(".preloader").removeClass("opacity");
+            $(".preloader").css("display","block");
+            
             //모든 노선정보 가져오기
             $.ajax({
                 dataType: "xml",
@@ -196,6 +205,11 @@ function setListBtnTab(obj) {
                     listHtml += "            </form>";
                     listHtml += "        </div>";
                     listHtml += "        <div class='infoTitle'>노선정보 (<span class='num'>" + listCnt + "</span>)</div>";
+                    
+                    if (globalFileUrl.indexOf("/JWN/") > -1) {
+        	        	listHtml += "        <div class='infoVisible'><input type='checkbox' name='' id='infoVisible'><label for='infoVisible'>정류장 노출</label></div>";
+        	        }
+                    
                     listHtml += "    </div>";
                     listHtml += "    <div class='infoMain'>";
                     listHtml += "        <div class='infoMainLeft'>";
@@ -250,7 +264,8 @@ function setListBtnTab(obj) {
                     removeMarker();
                     removeLowBusMarker();
                     removePolyline();
-
+                    
+                    console.log("setListBtnTabEnd");
                     $(".preloader").fadeOut(400);
 
                     //검색할 때 엔터키 submit 막기
@@ -263,6 +278,11 @@ function setListBtnTab(obj) {
                             }
                         }
                     });
+                    
+                    //노선검색에서 정류장 노출여부
+        	        $("#infoVisible").change(function() {
+        	        	setRouteStationVisible();
+        	        });
                 },
                 fail: function(res) {
                     if (res.readyState != 0 || res.status != 0) {
@@ -359,6 +379,7 @@ function setRISL(obj) {
         }
     } else {
         if (dataRouteId != undefined) {
+            console.log("setRISLStart");
             $(".preloader").addClass("opacity");
             $(".preloader").css("display","block");
             
@@ -443,9 +464,10 @@ function setRISL(obj) {
                     
                     if (globalFileUrl.indexOf("/JWN/") > -1) {
         	        	setRouteBusVisible(dataRouteId);
-        	        }
-
-                    $(".preloader").fadeOut(400);
+        	        } else {
+                        console.log("setRISLEnd");
+                        $(".preloader").fadeOut(400);
+                    }
                 },
                 fail: function(res) {
                     if (res.readyState != 0 || res.status != 0) {
@@ -539,14 +561,16 @@ function setBISL(obj) {
 	var listHtml = "";
     var resultJson = {};
     
-    $(".preloader").removeClass("opacity");
-	$(".preloader").css("display","block");
-    
     if (globalFileUrl.indexOf("/JWN/") > -1) {
         removeMarker();
         removeLowBusMarker();
+        removePolyline();
         lowBusMarker("start",dataRouteId,dataRouteNum);
     } else {
+        console.log("setBISLStart");
+        $(".preloader").removeClass("opacity");
+        $(".preloader").css("display","block");
+        
         //검색한 노선정보 가져오기
         $.ajax({
             dataType: "xml",
@@ -568,6 +592,11 @@ function setBISL(obj) {
                 listHtml += "            </form>";
                 listHtml += "        </div>";
                 listHtml += "        <div class='infoTitle'>노선정보 (<span class='num'>" + listCnt + "</span>)</div>";
+                
+                if (globalFileUrl.indexOf("/JWN/") > -1) {
+    	        	listHtml += "        <div class='infoVisible'><input type='checkbox' name='' id='infoVisible'><label for='infoVisible'>정류장 노출</label></div>";
+    	        }
+                
                 listHtml += "    </div>";
                 listHtml += "    <div class='infoMain'>";
                 listHtml += "        <div class='infoMainLeft'>";
@@ -619,7 +648,8 @@ function setBISL(obj) {
                     $("#contList .listInfoArea .infoTop .infoTitle .num").html(listCnt);
                     setRISL($("#contList .listInfoArea .infoMain .infoMainLeft .routeList li .listTit[data-route-id='" + dataRouteId + "']"));	            
                 }
-
+                
+                console.log("setBISLEnd");
                 $(".preloader").fadeOut(400);
 
                 //검색할 때 엔터키 submit 막기
@@ -631,6 +661,11 @@ function setBISL(obj) {
                         }
                     }
                 });
+                
+                //노선검색에서 정류장 노출여부
+    	        $("#infoVisible").change(function() {
+    	        	setRouteStationVisible();
+    	        });
             },
             fail: function(res) {
                 if (res.readyState != 0 || res.status != 0) {
@@ -664,13 +699,14 @@ function setBISL(obj) {
 }
 
 //모바일 노선검색에서 노선 클릭시 실행
-function setMRISL(obj) {
+function setMRISL(obj,busId) {
     var dataRouteId = $(obj).attr("data-route-id");
     var listHtml = "";
     var resultJson = {};
     var resultArr = [];
+    busId = (busId != undefined) ? busId : "";
     
-    if ($(obj).parent("li").hasClass("on")) {
+    if ($(obj).parent("li").hasClass("on") && busId == "") {
         $(obj).parent("li").removeClass("on");
         $(obj).next(".stationList").html(listHtml);
         
@@ -679,6 +715,7 @@ function setMRISL(obj) {
         }
     } else {
         if (dataRouteId != undefined) {
+            console.log("setMRISLStart");
             $(".preloader").addClass("opacity");
             $(".preloader").css("display","block");
             
@@ -750,13 +787,14 @@ function setMRISL(obj) {
 
                     removeMarker();
                     removePolyline();
-                    routeMarker("Y","Y",dataRouteId,resultArr);
+                    routeMarker("Y","Y",dataRouteId,resultArr,busId);
                     
                     if (globalFileUrl.indexOf("/JWN/") > -1) {
-        	        	setRouteBusVisible(dataRouteId);
-        	        }
-
-                    $(".preloader").fadeOut(400);
+        	        	setRouteBusVisible(dataRouteId,busId);
+        	        } else {
+                        console.log("setMRISLEnd");
+                        $(".preloader").fadeOut(400);
+                    }
                 },
                 fail: function(res) {
                     if (res.readyState != 0 || res.status != 0) {
@@ -887,6 +925,7 @@ function openRouteDetailLayer(obj) {
     var listSubHtml = "";
     var resultJson = {};
     
+    console.log("openRouteDetailLayerStart");
     $(".preloader").addClass("opacity");
     $(".preloader").css("display","block");
     
@@ -977,7 +1016,8 @@ function openRouteDetailLayer(obj) {
             }
 
             $("#routeDetailLayer").addClass("on");
-
+            
+            console.log("openRouteDetailLayerEnd");
             $(".preloader").fadeOut(400);
         },
         fail: function(res) {
@@ -1119,6 +1159,7 @@ function setNoticeSelect(obj) {
     var resultArr = [];
     
     if (dataRouteId != "" && dataRouteId != undefined) {
+        console.log("setNoticeSelectStart");
     	$(".preloader").addClass("opacity");
     	$(".preloader").css("display","block");
     	
@@ -1181,6 +1222,7 @@ function setNoticeSelect(obj) {
     		    removePolyline();
     		    routeMarker("N","N",dataRouteId,resultArr);
     		    
+                console.log("setNoticeSelectEnd");
     		    $(".preloader").fadeOut(400);
     		},
     		fail: function(res) {
@@ -1373,6 +1415,7 @@ function setInfoSearch(obj) {
                 		
                 		$("#contList .listInfoArea .infoMain .infoMainRight .stationList").html("<div class='empty'>노선을 선택해주세요.</div>");
                     } else {
+                        console.log("setInfoSearchRouteStart");
                         $(".preloader").addClass("opacity");
                         $(".preloader").css("display","block");
 
@@ -1435,7 +1478,8 @@ function setInfoSearch(obj) {
                                 if ($("#contList .listInfoArea .infoMain .infoMainRight").length > 0) {
                                     $("#contList .listInfoArea .infoMain .infoMainRight").html(listRightHtml);
                                 }
-
+                                
+                                console.log("setInfoSearchRouteEnd");
                                 $(".preloader").fadeOut(400);
                             },
                             fail: function(res) {
@@ -1465,6 +1509,7 @@ function setInfoSearch(obj) {
                 }
             } else if (type == "station") {
                 if (keyword != "" && keyword != undefined && keyword != null) {
+                    console.log("setInfoSearchStationStart");
                 	$(".preloader").addClass("opacity");
                 	$(".preloader").css("display","block");
                 	
@@ -1537,6 +1582,7 @@ function setInfoSearch(obj) {
                             removePolyline();
                             stationMarker("Y","N","N",resultArr);
                             
+                            console.log("setInfoSearchStationEnd");
                             $(".preloader").fadeOut(400);
                 		},
                 		fail: function(res) {
@@ -1596,6 +1642,7 @@ function setInfoSearch(obj) {
                 			$("#mContList .mListInfoArea .mInfoMain .empty").css("display","block");
                 		}
                     } else {
+                        console.log("setInfoSearchMrouteStart");
                         $(".preloader").addClass("opacity");
                         $(".preloader").css("display","block");
 
@@ -1651,7 +1698,8 @@ function setInfoSearch(obj) {
                                 if ($("#mContList .mListInfoArea .mInfoMain").length > 0) {
                                     $("#mContList .mListInfoArea .mInfoMain").html(listHtml);
                                 }
-
+                                
+                                console.log("setInfoSearchMrouteEnd");
                                 $(".preloader").fadeOut(400);
                             },
                             fail: function(res) {
@@ -1677,12 +1725,43 @@ function setInfoSearch(obj) {
                         });
                     }
                 } else {
-                    openLayer("alert","노선번호를 입력해주세요.","");
+                    if (globalFileUrl.indexOf("/JWN/") > -1) {
+                        var listCnt = 0;
+                		
+                		$("#mContList .mListInfoArea .mInfoMain .routeList>li").each(function() {
+                			$(this).find(".stationList").html("");
+                			
+                			$(this).css("display","block");
+                            listCnt++;
+                		});
+                		
+                		$("#mContList .mListInfoArea .mInfoTop .mInfoTitle .num").text(listCnt);
+                		
+                		if (listCnt > 0) {
+                			$("#mContList .mListInfoArea .mInfoMain .empty").css("display","none");
+                			$("#mContList .mListInfoArea .mInfoMain .routeList>li").removeClass("on");
+                			$("#mContList .mListInfoArea .mInfoMain .routeList").css("display","block");
+                		} else {
+                			$("#mContList .mListInfoArea .mInfoMain .routeList>li").removeClass("on");
+                			$("#mContList .mListInfoArea .mInfoMain .routeList").css("display","none");
+                			
+                			if ($("#mContList .mListInfoArea .mInfoMain .empty").length == 0) {
+                				$("#mContList .mListInfoArea .mInfoMain").append("<div class='empty'>노선정보가 없습니다.</div>");
+                			}
+                			
+                			$("#mContList .mListInfoArea .mInfoMain .empty").css("display","block");
+                		}
+                    } else {
+                        openLayer("alert","노선번호를 입력해주세요.","");
+                    }
                 }
             } else if (type == "mStation") {
                 if (keyword != "" && keyword != undefined && keyword != null) {
+                    console.log("setInfoSearchMstationStart");
                 	$(".preloader").addClass("opacity");
                 	$(".preloader").css("display","block");
+                    
+                    clearTimeout(gpsTimer);
                 	
                 	//검색한 정류장정보 가져오기
                 	$.ajax({
@@ -1695,6 +1774,9 @@ function setInfoSearch(obj) {
 
                             var listCnt = (resultXml.length > 0) ? resultXml.length : 0;
                 	        
+                            gpsSearchArr = [];
+                            gpsSearchKeyword = keyword;
+                            
                 	        if (listCnt > 0) {
                                 listCnt = 0;
                                 
@@ -1707,6 +1789,8 @@ function setInfoSearch(obj) {
                                         resultJson[listCnt] = resultXmlJson;
 
                                         listCnt++;
+                                        
+                                        gpsSearchArr.push(stationId);
                                     }
                                 });
                                 
@@ -1745,8 +1829,13 @@ function setInfoSearch(obj) {
                             removeLowBusMarker();
             	            removePolyline();
             	            stationMarker("Y","N","N",resultArr);
-            	            
-            	            $(".preloader").fadeOut(400);
+                            
+                            if (globalFileUrl.indexOf("/JWN/") > -1 && $(".mGpsBtn").hasClass("on")) {
+                                setGpsPosition2("station","start");
+                            } else {
+                                console.log("setInfoSearchMstationEnd");
+                                $(".preloader").fadeOut(400);
+                            }
                 		},
                 		fail: function(res) {
                 			if (res.readyState != 0 || res.status != 0) {
@@ -1770,10 +1859,45 @@ function setInfoSearch(obj) {
                 		}
                 	});
                 } else {
-                    openLayer("alert","정류장명 또는 정류장번호를 입력해주세요.","");
+                    if (globalFileUrl.indexOf("/JWN/") > -1) {
+                        console.log("setInfoSearchMstationBlankStart");
+                        $(".preloader").addClass("opacity");
+                        $(".preloader").css("display","block");
+                        
+                        clearTimeout(gpsTimer);
+                        
+                        var listCnt = 0;
+                        
+                        gpsSearchArr = [];
+                        gpsSearchKeyword = "";
+
+                        listHtml += "<div class='empty'>정류장을 검색해주세요.</div>";
+
+                        if ($("#mContList .mListInfoArea .mInfoTop .mInfoTitle .num").length > 0) {
+                            $("#mContList .mListInfoArea .mInfoTop .mInfoTitle .num").text(listCnt);
+                        }
+
+                        if ($("#mContList .mListInfoArea .mInfoMain").length > 0) {
+                            $("#mContList .mListInfoArea .mInfoMain").html(listHtml);
+                        }
+
+                        removeMarker();
+                        removeLowBusMarker();
+                        removePolyline();
+
+                        if ($(".mGpsBtn").hasClass("on")) {
+                            setGpsPosition2("station","start");
+                        } else {
+                            console.log("setInfoSearchMstationBlankEnd");
+                            $(".preloader").fadeOut(400);
+                        }
+                    } else {
+                        openLayer("alert","정류장명 또는 정류장번호를 입력해주세요.","");
+                    }
                 }
             } else if (type == "mStart") {
                 if (keyword != "" && keyword != undefined && keyword != null) {
+                    console.log("setInfoSearchMstartStart");
                 	$(".preloader").addClass("opacity");
                 	$(".preloader").css("display","block");
                 	
@@ -1843,6 +1967,7 @@ function setInfoSearch(obj) {
         	                removePolyline();
             	            stationMarker("Y","Y","N",resultArr);
             	            
+                            console.log("setInfoSearchMstartEnd");
             	            $(".preloader").fadeOut(400);
                 		},
                 		fail: function(res) {
@@ -1871,6 +1996,7 @@ function setInfoSearch(obj) {
                 }
             } else if (type == "mArrival") {
                 if (keyword != "" && keyword != undefined && keyword != null) {
+                    console.log("setInfoSearchMarrivalStart");
                 	$(".preloader").addClass("opacity");
                 	$(".preloader").css("display","block");
                 	
@@ -1940,6 +2066,7 @@ function setInfoSearch(obj) {
         	                removePolyline();
             	            stationMarker("Y","Y","N",resultArr);
             	            
+                            console.log("setInfoSearchMarrivalEnd");
             	            $(".preloader").fadeOut(400);
                 		},
                 		fail: function(res) {
@@ -1968,6 +2095,7 @@ function setInfoSearch(obj) {
                 }
             } else if (type == "mRouteDetail") {
                 if (keyword != "" && keyword != undefined && keyword != null) {
+                    console.log("setInfoSearchMrouteDetailStart");
                 	$(".preloader").addClass("opacity");
                 	$(".preloader").css("display","block");
                 	
@@ -2031,6 +2159,7 @@ function setInfoSearch(obj) {
             	                $("#mContList .mListInfoArea .mInfoMain").html(listHtml);
             	            }
             	            
+                            console.log("setInfoSearchMrouteDetailEnd");
             	            $(".preloader").fadeOut(400);
                 		},
                 		fail: function(res) {
@@ -2059,6 +2188,7 @@ function setInfoSearch(obj) {
                 }
             } else if (type == "mBus") {
                 if (keyword != "" && keyword != undefined && keyword != null) {
+                    console.log("setInfoSearchMbusStart");
                 	$(".preloader").addClass("opacity");
                 	$(".preloader").css("display","block");
                 	
@@ -2122,6 +2252,7 @@ function setInfoSearch(obj) {
             	                $("#mContList .mListInfoArea .mInfoMain").html(listHtml);
             	            }
             	            
+                            console.log("setInfoSearchMbusEnd");
             	            $(".preloader").fadeOut(400);
                 		},
                 		fail: function(res) {
