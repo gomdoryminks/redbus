@@ -1218,7 +1218,7 @@ function stationInfoWindow(state, stationId, stationName, stationLatitude, stati
         if (courseFlag == "Y") {
             siwHtml += "        <div class='courseBtnArea'>";
             //siwHtml += "            <div class='courseBtn' data-station-id='" + stationId + "' data-station-name='" + stationName + "' data-station-latitude='" + stationLatitude + "' data-station-longitude='" + stationLongitude + "' onclick='setCourseInput(\"mStart\",this);'>출발</div>";
-            siwHtml += "            <div class='courseBtn' data-station-id='" + stationId + "' data-station-name='" + stationName + "' data-station-latitude='" + stationLatitude + "' data-station-longitude='" + stationLongitude + "' onclick='setCourseInput(\"mArrival\",this);'>도착</div>";
+            //siwHtml += "            <div class='courseBtn' data-station-id='" + stationId + "' data-station-name='" + stationName + "' data-station-latitude='" + stationLatitude + "' data-station-longitude='" + stationLongitude + "' onclick='setCourseInput(\"mArrival\",this);'>도착</div>";
             siwHtml += "        </div>";
         }
 
@@ -1265,14 +1265,32 @@ function stationInfoWindow(state, stationId, stationName, stationLatitude, stati
                             var routeStationNm = globalRouteStationNm[resultArr[row].routeId];
                             var arrivalTime = Math.ceil(resultArr[row].arrtime / 60);
                             
-                            if (globalFileUrl.indexOf("/mobile/") > -1) {
-                            	siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setMBISL(this);'>";
+                            if (globalFileUrl.indexOf("/JWN/") > -1) {
+                                if (resultArr[row].vehicletp == "저상버스") {
+                                    if (globalFileUrl.indexOf("/mobile/") > -1) {
+                                        siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setMBISL(this);'>";
+                                    } else {
+                                        siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setBISL(this);'>";
+                                    }
+                                } else {
+                                    siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='openLayer(\"alert\",\"실시간 노선검색은 저상버스만 할 수 있습니다.\",\"\");'>";
+                                }
                             } else {
-                            	siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setBISL(this);'>";
+                                if (globalFileUrl.indexOf("/mobile/") > -1) {
+                                    siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setMBISL(this);'>";
+                                } else {
+                                    siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setBISL(this);'>";
+                                }
                             }
                             
                             siwHtml += "    <td><span>" + resultArr[row].routeNm + "</span>" + (routeStationNm != undefined ? " (" + routeStationNm + ")" : "") + "</td>";
-                            siwHtml += "    <td>" + resultArr[row].vehicletp + "</td>";
+                            
+                            if (globalFileUrl.indexOf("/JWN/") > -1 && resultArr[row].vehicletp == "저상버스") {
+                                siwHtml += "    <td><b>" + resultArr[row].vehicletp + "</b></td>";
+                            } else {
+                                siwHtml += "    <td>" + resultArr[row].vehicletp + "</td>";
+                            }
+                            
                             siwHtml += "    <td>" + (arrivalTime > 0 ? "약" + arrivalTime + "분후" : "곧도착") + "</td>";
                             siwHtml += "    <td>" + resultArr[row].arrprevstationcnt + "구간전</td>";
                             siwHtml += "</tr>";
@@ -1356,16 +1374,34 @@ function stationInfoWindow(state, stationId, stationName, stationLatitude, stati
 
                             for (var row in resultArr) {
                                 var routeStationNm = globalRouteStationNm[resultArr[row].routeId];
-                                var arrivalTime = Math.ceil(resultArr[row].arrtime / 60);
+                                var arrivalTime = Math.ceil(resultArr[row].arrtime / 60);                                
                                 
-                                if (globalFileUrl.indexOf("/mobile/") > -1) {
-                                	siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setMBISL(this);'>";
+                                if (globalFileUrl.indexOf("/JWN/") > -1) {
+                                    if (resultArr[row].vehicletp == "저상버스") {
+                                        if (globalFileUrl.indexOf("/mobile/") > -1) {
+                                            siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setMBISL(this);'>";
+                                        } else {
+                                            siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setBISL(this);'>";
+                                        }
+                                    } else {
+                                        siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='openLayer(\"alert\",\"실시간 노선검색은 저상버스만 할 수 있습니다.\",\"\");'>";
+                                    }
                                 } else {
-                                	siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setBISL(this);'>";
+                                    if (globalFileUrl.indexOf("/mobile/") > -1) {
+                                        siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setMBISL(this);'>";
+                                    } else {
+                                        siwHtml += "<tr data-route-id='" + resultArr[row].routeId + "' data-route-num='" + resultArr[row].routeNm + "' onclick='setBISL(this);'>";
+                                    }
                                 }
                                 
                                 siwHtml += "    <td><span>" + resultArr[row].routeNm + "</span>" + (routeStationNm != undefined ? " (" + routeStationNm + ")" : "") + "</td>";
-                                siwHtml += "    <td>" + resultArr[row].vehicletp + "</td>";
+                                
+                                if (globalFileUrl.indexOf("/JWN/") > -1 && resultArr[row].vehicletp == "저상버스") {
+                                    siwHtml += "    <td><b>" + resultArr[row].vehicletp + "</b></td>";
+                                } else {
+                                    siwHtml += "    <td>" + resultArr[row].vehicletp + "</td>";
+                                }
+                                
                                 siwHtml += "    <td>" + (arrivalTime > 0 ? "약" + arrivalTime + "분후" : "곧도착") + "</td>";
                                 siwHtml += "    <td>" + resultArr[row].arrprevstationcnt + "구간전</td>";
                                 siwHtml += "</tr>";
