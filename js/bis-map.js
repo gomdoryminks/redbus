@@ -499,7 +499,7 @@ function busMarker(state, routeId) {
     $.ajax({
         dataType: "xml",
         type: "GET",
-        url: "https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeId=" + globalCityName + routeId,
+        url: "http://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeId=" + globalCityName + routeId,
         success: function(result) {
             //console.log(result);
             var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -1234,7 +1234,7 @@ function stationInfoWindow(state, stationId, stationName, stationLatitude, stati
         $.ajax({
             dataType: "xml",
             type: "GET",
-            url: "https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeId=" + globalCityName + stationId,
+            url: "http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeId=" + globalCityName + stationId,
             success: function(result) {
                 //console.log(result);
                 var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -1345,7 +1345,7 @@ function stationInfoWindow(state, stationId, stationName, stationLatitude, stati
             $.ajax({
                 dataType: "xml",
                 type: "GET",
-                url: "https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeId=" + globalCityName + stationId,
+                url: "http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeId=" + globalCityName + stationId,
                 success: function(result) {
                     //console.log(result);
                     var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -1465,7 +1465,7 @@ function stationInfoWindow2(stationId) {
         $.ajax({
             dataType: "xml",
             type: "GET",
-            url: "https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeId=" + globalCityName + dataStationId,
+            url: "http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeId=" + globalCityName + dataStationId,
             success: function(result) {
                 //console.log(result);
                 var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -1928,7 +1928,7 @@ function setGpsPosition2(type,state) {
                     $.ajax({
                         dataType: "json",
                         type: "GET",
-                        url: "https://apis.data.go.kr/1613000/BusSttnInfoInqireService/getCrdntPrxmtSttnList?serviceKey=" + globalServiceKey2 + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo + "&_type=json&gpsLati=" + myLatitude + "&gpsLong=" + myLongitude,
+                        url: "http://apis.data.go.kr/1613000/BusSttnInfoInqireService/getCrdntPrxmtSttnList?serviceKey=" + globalServiceKey2 + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo + "&_type=json&gpsLati=" + myLatitude + "&gpsLong=" + myLongitude,
                         success: function(result) {
                             //console.log(result.response.body.items.item);
                             var gmjson = result.response.body.items.item;
