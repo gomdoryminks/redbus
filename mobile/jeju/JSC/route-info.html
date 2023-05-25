@@ -116,7 +116,7 @@
                 $.ajax({
                     dataType: "xml",
                     type: "GET",
-                    url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + dataRouteNum + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                    url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + dataRouteNum + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                     success: function(result) {
                         //console.log(result);
                         var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -198,7 +198,7 @@
                 $.ajax({
                     dataType: "xml",
                     type: "GET",
-                    url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                    url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                     success: function(result) {
                         //console.log(result);
                         var resultXml = $(result).find("response").find("body").find("items").find("item");
