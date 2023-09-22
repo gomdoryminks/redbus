@@ -130,7 +130,7 @@ function getRouteStationNm() {
     $.ajax({
         dataType: "xml",
         type: "GET",
-        url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+        url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
         success: function(result) {
             //console.log(result);
             var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -188,7 +188,7 @@ function setListBtnTab(obj) {
             $.ajax({
                 dataType: "xml",
                 type: "GET",
-                url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                 success: function(result) {
                     //console.log(result);
                     var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -392,7 +392,7 @@ function setRISL(obj) {
             $.ajax({
                 dataType: "xml",
                 type: "GET",
-                url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeId=" + globalCityName + dataRouteId + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeId=" + globalCityName + dataRouteId + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                 success: function(result) {
                     //console.log(result);
                     var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -575,7 +575,7 @@ function setBISL(obj) {
         $.ajax({
             dataType: "xml",
             type: "GET",
-            url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + dataRouteNum + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+            url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + dataRouteNum + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
             success: function(result) {
                 //console.log(result);
                 var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -728,7 +728,7 @@ function setMRISL(obj,busId) {
             $.ajax({
                 dataType: "xml",
                 type: "GET",
-                url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeId=" + globalCityName + dataRouteId + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeId=" + globalCityName + dataRouteId + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                 success: function(result) {
                     //console.log(result);
                     var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -933,7 +933,7 @@ function openRouteDetailLayer(obj) {
     $.ajax({
         dataType: "xml",
         type: "GET",
-        url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteInfoIem?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeId=" + globalCityName + dataRouteId,
+        url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteInfoIem?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeId=" + globalCityName + dataRouteId,
         success: function(result) {
             //console.log(result);
             var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -1167,7 +1167,7 @@ function setNoticeSelect(obj) {
     	$.ajax({
     		dataType: "xml",
     		type: "GET",
-    		url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeId=" + globalCityName + dataRouteId + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+    		url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeId=" + globalCityName + dataRouteId + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
     		success: function(result) {
     			//console.log(result);
                 var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -1423,7 +1423,7 @@ function setInfoSearch(obj) {
                         $.ajax({
                             dataType: "xml",
                             type: "GET",
-                            url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + keyword + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                            url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + keyword + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                             success: function(result) {
                                 //console.log(result);
                                 var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -1517,7 +1517,7 @@ function setInfoSearch(obj) {
                 	$.ajax({
                 		dataType: "xml",
                 		type: "GET",
-                		url: "https://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeNm=&nodeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                		url: "http://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeNm=&nodeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                 		success: function(result) {
                 			//console.log(result);
                             var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -1650,7 +1650,7 @@ function setInfoSearch(obj) {
                         $.ajax({
                             dataType: "xml",
                             type: "GET",
-                            url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + keyword + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                            url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + keyword + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                             success: function(result) {
                                 //console.log(result);
                                 var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -1767,7 +1767,7 @@ function setInfoSearch(obj) {
                 	$.ajax({
                 		dataType: "xml",
                 		type: "GET",
-                		url: "https://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeNm=&nodeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                		url: "http://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeNm=&nodeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                 		success: function(result) {
                 			//console.log(result);
                 			var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -1905,7 +1905,7 @@ function setInfoSearch(obj) {
                 	$.ajax({
                 		dataType: "xml",
                 		type: "GET",
-                		url: "https://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeNm=&nodeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                		url: "http://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeNm=&nodeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                 		success: function(result) {
                 			//console.log(result);
                             var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -2004,7 +2004,7 @@ function setInfoSearch(obj) {
                 	$.ajax({
                 		dataType: "xml",
                 		type: "GET",
-                		url: "https://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeNm=&nodeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                		url: "http://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&nodeNm=&nodeNo=&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                 		success: function(result) {
                 			//console.log(result);
                             var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -2103,7 +2103,7 @@ function setInfoSearch(obj) {
                 	$.ajax({
                 		dataType: "xml",
                         type: "GET",
-                        url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + keyword + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                        url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + keyword + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                 		success: function(result) {
                 			//console.log(result);
                             var resultXml = $(result).find("response").find("body").find("items").find("item");
@@ -2196,7 +2196,7 @@ function setInfoSearch(obj) {
                 	$.ajax({
                 		dataType: "xml",
                         type: "GET",
-                        url: "https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + keyword + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
+                        url: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=" + globalServiceKey + "&cityCode=" + globalCityCode + "&routeNo=" + keyword + "&numOfRows=" + globalNumOfRows + "&pageNo=" + globalPageNo,
                 		success: function(result) {
                 			//console.log(result);
                             var resultXml = $(result).find("response").find("body").find("items").find("item");
